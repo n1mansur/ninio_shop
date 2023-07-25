@@ -68,7 +68,7 @@ export default function ProductCard({ el }) {
             zIndex={'1'}
             className={styles.cardImg}
           >
-            <Image src={el.photo} />
+            <Image src={el.photo} alt={el.name} />
           </Box>
         </Box>
         <Box className={styles.productInfo}>

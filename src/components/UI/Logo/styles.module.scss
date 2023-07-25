@@ -1,0 +1,15 @@
+@import '@/styles/breakpoints';
+@include breakpoint('md') {
+}
+.logo {
+  width: 159px;
+  height: 48px;
+  @include breakpoint('md') {
+    width: 106px;
+    height: 32px;
+  }
+  .img {
+    width: 100%;
+    height: 100%;
+  }
+}

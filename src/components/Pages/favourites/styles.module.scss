@@ -1,0 +1,15 @@
+@import '@/styles/breakpoints';
+
+.favorites {
+  padding-top: 120px;
+}
+
+.products {
+  display: flex;
+  gap: 20px;
+  overflow: scroll;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}

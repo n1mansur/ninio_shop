@@ -1,0 +1,7 @@
+@import '@/styles/breakpoints';
+@include breakpoint('md') {
+
+}
+.bg {
+  background: rgba(246, 246, 246, 1);
+}

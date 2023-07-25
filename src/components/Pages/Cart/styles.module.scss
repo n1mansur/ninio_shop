@@ -1,0 +1,97 @@
+@import '@/styles/breakpoints';
+
+.cart {
+  padding-top: 120px;
+
+  .heading {
+    font-weight: 600;
+    font-size: 40px;
+    margin-bottom: 24px;
+  }
+
+  .cartSection {
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+    gap: 24px;
+    @include breakpoint('lg'){
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+}
+
+
+.cards {
+  max-width: 800px;
+  width: 100%;
+  background: rgba(255, 255, 255, 1);
+  border-radius: 12px;
+  padding: 24px;
+  @include breakpoint('lg'){
+    max-width: 100%;
+  }
+  .cardsHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(176, 186, 191, 1);
+    padding-bottom: 10px;
+
+    .clearAllBtn {
+      color: rgba(110, 124, 135, 1);
+      transition: 0.5s all;
+
+      &:hover {
+        box-shadow: 0 0 5px rgb(210, 210, 210);
+      }
+    }
+  }
+
+  .cardsList {
+    padding: 24px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+}
+
+.totalSection {
+  background: #fff;
+  max-width: 424px;
+  width: 100%;
+  padding: 24px 16px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  @include breakpoint('lg'){
+    max-width: 100%;
+  }
+  .flex {
+    justify-content: space-between;
+    align-items: center;
+
+    .heading {
+      margin-bottom: 0 !important;
+    }
+
+    .sum {
+      white-space: nowrap;
+      overflow: scroll;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+  }
+}
+
+.buyBtn {
+  width: 100%;
+  padding: 14px 0;
+  border-radius: 6px;
+  text-align: center;
+  color: #fff;
+  background: rgba(3, 50, 70, 1);
+}

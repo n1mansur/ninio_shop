@@ -1,0 +1,39 @@
+{
+	"compilerOptions": {
+		"target": "es5",
+		"lib": ["dom", "dom.iterable", "esnext"],
+		"allowJs": true,
+		"skipLibCheck": true,
+		"strict": true,
+		"forceConsistentCasingInFileNames": true,
+		"noEmit": true,
+		"esModuleInterop": true,
+		"module": "esnext",
+		"moduleResolution": "node",
+		"resolveJsonModule": true,
+		"isolatedModules": true,
+		"jsx": "preserve",
+		"incremental": true,
+		"paths": {
+			"@/*": ["./src/*"]
+		}
+	},
+	"include": [
+		"next-env.d.ts",
+		"**/*.ts",
+		"**/*.tsx",
+		"src/utils/__test__/pxToRem.spec.js",
+		"src/utils/__test__/pxToRem.spec.js",
+		"src/components/Pages/Main/index.jsx",
+		"src/components/UI/Hero/index.jsx",
+		"src/components/Pages/Company/index.jsx",
+		"src/components/Pages/Blog/index.tsx",
+		"src/components/Pages/Team/index.jsx",
+		"src/pages/index.jsx",
+		"src/components/Pages/Faq/index.jsx",
+		"src/pages/news/[newsId].jsx",
+		"src/components/Pages/Partners/index.jsx",
+		"src/pages/higher-education/index.jsx"
+	],
+	"exclude": ["node_modules"]
+}

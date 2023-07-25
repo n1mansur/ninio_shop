@@ -1,0 +1,52 @@
+@import '@/styles/breakpoints';
+
+@include breakpoint('md') {}
+
+.footer {
+  width: 100%;
+  min-height: 72px;
+  background: #fff !important;
+
+  .container {
+    max-width: 1240px !important;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 32px 0;
+    gap: 20px;
+
+    @include breakpoint('md') {
+      padding: 32px;
+      flex-direction: column;
+    }
+  }
+}
+
+.contacts {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: start;
+  color: #033246;
+}
+
+.socials {
+  margin-bottom: 20px;
+
+  .socialsSection {
+    max-width: 104px;
+    display: flex;
+    gap: 10px;
+    overflow: scroll;
+    &::-webkit-scrollbar{
+      display: none;
+    }
+    
+    @include breakpoint('md') {
+      max-width: none;
+      width: 50vw;
+    }
+
+  }
+}

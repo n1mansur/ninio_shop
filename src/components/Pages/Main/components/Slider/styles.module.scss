@@ -1,0 +1,11 @@
+.slide {
+  max-width: 1248px;
+  height: 336px;
+  border-radius: 12px;
+  overflow: hidden;
+  .img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+}

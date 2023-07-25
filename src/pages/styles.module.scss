@@ -1,0 +1,8 @@
+@import '@/styles/breakpoints';
+.box {
+  padding: 100px 0;
+  background: #f6f6f6;
+  @include breakpoint('md') {
+    padding-top: 150px;
+  }
+}

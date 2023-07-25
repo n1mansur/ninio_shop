@@ -9,8 +9,8 @@ import Card from './CheckoutCard';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { CheckIcon } from '@chakra-ui/icons';
 import Maps from './Maps';
-import { invokeFunction } from '@/services/invokeFunctionService.js'
-import axios from 'axios';
+import { invokeFunction } from '../../services/InvokeFunctionService';
+
 
 export default function CheckoutPage() {
   const toast = useToast()

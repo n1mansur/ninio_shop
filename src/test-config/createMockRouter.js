@@ -19,7 +19,7 @@ export function createMockRouter(router) {
 		isFallback: false,
 		isLocaleDomain: false,
 		isReady: true,
-		defaultLocale: 'en',
+		defaultLocale: 'ru',
 		domainLocales: [],
 		isPreview: false,
 		...router,

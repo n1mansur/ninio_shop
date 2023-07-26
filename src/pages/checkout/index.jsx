@@ -5,7 +5,7 @@ import { Box, Button, Heading, Input, Text, useToast } from '@chakra-ui/react';
 import Logo from '@/components/UI/Logo'
 import Container from '@/components/UI/Container'
 import { ArrowLeftIcon } from '@/components/svg';
-import Card from './CheckoutCard';
+import CheckoutCard from './CheckoutCard';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { CheckIcon } from '@chakra-ui/icons';
 import Maps from './Maps';
@@ -227,7 +227,7 @@ return (
         {products && <Box className={styles.yourOrders}>
           <Heading className={styles.heading}>Ваш заказ</Heading>
           {products.map(el => (
-            <Card el={el} key={el.guid} />
+            <CheckoutCard el={el} key={el.guid} />
           ))}
         </Box>}
       </Container>

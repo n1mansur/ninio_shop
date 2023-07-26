@@ -1,7 +1,6 @@
 import { Box, Flex } from '@chakra-ui/react'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import styles from './styles.module.scss'
-import { HeartIcon, DeleteIcon, PlusIcon, MinusIcon } from '@/components/svg'
 import { useResponsive } from '@/hooks/useResponsive'
 
 export default function Card({ el, toFavorite, setProducts }) {
@@ -10,7 +9,7 @@ export default function Card({ el, toFavorite, setProducts }) {
   const formattedNumber = el?.sell_price?.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1 ');
 
   const img = (
-    <Box mb={md && '10px'} className={styles.productImg}>
+    el.photo && <Box mb={md && '10px'} className={styles.productImg}>
       <img src={el.photo} alt={el.name} />
     </Box>
   )

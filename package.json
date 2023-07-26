@@ -1,5 +1,5 @@
 {
-	"name": "next_js_template_v2",
+	"name": "ninio-shop",
 	"version": "0.1.0",
 	"private": true,
 	"scripts": {
@@ -67,6 +67,7 @@
 		"@testing-library/react-hooks": "^8.0.1",
 		"@typescript-eslint/parser": "^5.57.0",
 		"babel-jest": "^29.4.3",
+		"babel-plugin-root-import": "^6.6.0",
 		"eslint-config-prettier": "^8.8.0",
 		"eslint-config-react-app": "^7.0.1",
 		"husky": "^8.0.0",

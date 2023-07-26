@@ -32,6 +32,8 @@ export default function ProductCard({ el }) {
 
   const toggle = tofavorite?.filter(old => old === el.guid)
 
+  const formattedNumber = el?.sell_price?.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1 ');
+
   return (
     <Box onClick={() => {
       window.location.href = `/product/${el.guid}`
@@ -78,13 +80,9 @@ export default function ProductCard({ el }) {
           <Text className={styles.productName}>
             <span>{el.name}</span>
           </Text>
-          <Text className={styles.productPrice}>{el.sell_price} Сум</Text>
+          <Text className={styles.productPrice}>{formattedNumber} Сум</Text>
         </Box>
-        {/*<Link
-          href={`/product/${el.guid}`}
-        >*/}
           <Button className={styles.buyBtn}>Добавить</Button>
-        {/*</Link>*/}
       </Box>
     </Box>
   )

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import styles from './styles.module.scss'
 import { useRouter } from 'next/router';
 import { Box, Button, Heading, Input, Text, useToast } from '@chakra-ui/react';
@@ -65,101 +65,119 @@ export default function CheckoutPage() {
         duration: 4000,
         isClosable: true,
       })
-      
+
     } else {
+      const index = values.telegram_nickname.lastIndexOf('@')
+
       //console.log(
-      //  Object.assign({}, values, {
-      //    total_price: sumWithInitial,
-      //    ordered_products: [...productsId],
-      //    address_info: addressInfo.request,
-      //    address_latlong: addressInfo.resultCoordinates,
-      //  })
+      //  Object.assign({},
+      //    {
+      //      ...values,
+      //      telegram_nickname: index >= 0 
+      //      ? values.telegram_nickname.slice(index) 
+      //      : `@${values.telegram_nickname}`
+      //    },
+      //    {
+      //      total_price: sumWithInitial,
+      //      ordered_products: [...productsId],
+      //      address_info: addressInfo.request,
+      //      address_latlong: addressInfo.resultCoordinates,
+      //    })
       //);
       invokeFunction.post(
-        Object.assign({}, values, {
-          total_price: sumWithInitial,
-          ordered_products: [...productsId],
-          address_info: addressInfo.request,
-          address_latlong: addressInfo.resultCoordinates,
-        }))
-    toast({
-      title: 'Отправляем...',
-      status: 'success',
-      duration: 4000,
-      isClosable: true,
-    })
+        Object.assign({},
+          {
+            ...values,
+            telegram_nickname: index >= 0 
+            ? values.telegram_nickname.slice(index) 
+            : `@${values.telegram_nickname}`
+          },
+          {
+            total_price: sumWithInitial,
+            ordered_products: [...productsId],
+            address_info: addressInfo.request,
+            address_latlong: addressInfo.resultCoordinates,
+          }
+        )
+      )
+      toast({
+        title: 'Отправляем...',
+        status: 'success',
+        duration: 4000,
+        isClosable: true,
+      })
+    }
+
   }
 
-}
-
-return (
-  <Box className={styles.checkoutPage}>
-    <Container padding={'0 37px'}>
-      <Box className={styles.header}>
-        <Button className={styles.goBack} onClick={() => goBack()} color={'#5B6871'}>
-          <ArrowLeftIcon />
-          Назад
-        </Button>
-        <Box className={styles.logo}>
-          <Logo />
+  return (
+    <Box className={styles.checkoutPage}>
+      <Container padding={'0 37px'}>
+        <Box className={styles.header}>
+          <Button className={styles.goBack} onClick={() => goBack()} color={'#5B6871'}>
+            <ArrowLeftIcon />
+            Назад
+          </Button>
+          <Box className={styles.logo}>
+            <Logo />
+          </Box>
         </Box>
-      </Box>
-    </Container>
-    <Box className={styles.body}>
-      <Container>
-        <Heading className={styles.heading}>
-          Оформление заказа
-        </Heading>
-        <Formik
-          initialValues={initialValues}
-          validate={validate}
-          onSubmit={(values) => onSubmit(values)}
-        >
-          {props => (
-            <Form className={styles.form}>
-              <Box className={styles.yourInfo}>
-                <Heading className={styles.heading}>Ваши данные</Heading>
-                <Box className={styles.inputs}>
-                  <label className={styles.label}>
-                    ФИО
-                    <Field
-                      type="text"
-                      id='full_name'
-                      name='full_name'
-                      className={styles.labelInp}
-                    />
-                    <ErrorMessage className={styles.errorMessage} name="full_name" component="div" />
-                  </label>
-                  <label className={styles.label}>
-                    Номер телефона
-                    <Field
-                      type="number"
-                      id='phone_number'
-                      name='phone_number'
-                      className={styles.labelInp} />
-                    <ErrorMessage className={styles.errorMessage} name="phone_number" component="div" />
-                  </label>
-                </Box>
-                <Box className={styles.inputs}>
-                  <label className={styles.label}>
-                    Телеграм ник
-                    <Field
-                      type="text"
-                      id='telegram_nickname'
-                      name='telegram_nickname'
-                      className={styles.labelInp} />
-                  </label>
-                  <label className={styles.label}>
-                    Инстаграм ник
-                    <Field
-                      type="text"
-                      id='instagram_nickname'
-                      name='instagram_nickname'
-                      className={styles.labelInp} />
-                  </label>
-                </Box>
-                <Box className={styles.inputs}>
-                  <label className={styles.label}>
+      </Container>
+      <Box className={styles.body}>
+        <Container>
+          <Heading className={styles.heading}>
+            Оформление заказа
+          </Heading>
+          <Formik
+            initialValues={initialValues}
+            validate={validate}
+            onSubmit={(values) => onSubmit(values)}
+          >
+            {props => (
+              <Form className={styles.form}>
+                <Box className={styles.yourInfo}>
+                  <Heading className={styles.heading}>Ваши данные</Heading>
+                  <Box className={styles.inputs}>
+                    <label className={styles.label}>
+                      ФИО
+                      <Field
+                        type="text"
+                        id='full_name'
+                        name='full_name'
+                        className={styles.labelInp}
+                      />
+                      <ErrorMessage className={styles.errorMessage} name="full_name" component="div" />
+                    </label>
+                    <label className={styles.label}>
+                      Номер телефона
+                      <Field
+                        type="number"
+                        id='phone_number'
+                        name='phone_number'
+                        className={styles.labelInp} />
+                      <ErrorMessage className={styles.errorMessage} name="phone_number" component="div" />
+                    </label>
+                  </Box>
+                  <Box className={styles.inputs}>
+                    <label className={styles.label}>
+                      Телеграм ник
+                      <Field
+                        type="text"
+                        id='telegram_nickname'
+                        name='telegram_nickname'
+                        className={styles.labelInp} />
+                    </label>
+                    <label className={styles.label}>
+                      Инстаграм ник
+                      <Field
+                        type="text"
+                        id='instagram_nickname'
+                        name='instagram_nickname'
+                        className={styles.labelInp} />
+                    </label>
+                  </Box>
+                  <Box className={styles.inputs}>
+                    <label className={styles.label}>
                       Дополнительная информммация о месте доставки
                       <Field
                         type="text"
@@ -167,71 +185,71 @@ return (
                         name='address_info'
                         placeholder="Наприммер: Ташкент, курганский-район, дом 22... "
                         className={styles.labelInp} />
-                    <ErrorMessage className={styles.errorMessage} name="address_info" component="div" />
+                      <ErrorMessage className={styles.errorMessage} name="address_info" component="div" />
                     </label>
-                  <Box className={styles.typePayment}>
-                    <Text>
-                      Тип оплаты
-                    </Text>
-                    <Box className={styles.typePaymentSection}>
-                      <label className={props.values.payment_type === 'картой' ? styles.active : ''}>
-                        карта
-                        {
-                          props.values.payment_type === 'картой'
-                          && <Box className={styles.radioIcon}>
-                            <CheckIcon />
-                          </Box>
-                        }
-                        <Field
-                          type="radio"
-                          id='payment_type'
-                          name='payment_type'
-                          value='картой'
-                          className={styles.labelInp} />
-                      </label>
-                      <label className={props.values.payment_type === 'наличными' ? styles.active : ''}>
-                        Наличными
-                        {
-                          props.values.payment_type === 'наличными'
-                          && <Box className={styles.radioIcon}>
-                            <CheckIcon />
-                          </Box>
-                        }
-                        <Field
-                          type="radio"
-                          id='payment_type'
-                          name='payment_type'
-                          value='наличными'
-                          className={styles.labelInp} />
-                      </label>
+                    <Box className={styles.typePayment}>
+                      <Text>
+                        Тип оплаты
+                      </Text>
+                      <Box className={styles.typePaymentSection}>
+                        <label className={props.values.payment_type === 'картой' ? styles.active : ''}>
+                          карта
+                          {
+                            props.values.payment_type === 'картой'
+                            && <Box className={styles.radioIcon}>
+                              <CheckIcon />
+                            </Box>
+                          }
+                          <Field
+                            type="radio"
+                            id='payment_type'
+                            name='payment_type'
+                            value='картой'
+                            className={styles.labelInp} />
+                        </label>
+                        <label className={props.values.payment_type === 'наличными' ? styles.active : ''}>
+                          Наличными
+                          {
+                            props.values.payment_type === 'наличными'
+                            && <Box className={styles.radioIcon}>
+                              <CheckIcon />
+                            </Box>
+                          }
+                          <Field
+                            type="radio"
+                            id='payment_type'
+                            name='payment_type'
+                            value='наличными'
+                            className={styles.labelInp} />
+                        </label>
+                      </Box>
+                      <ErrorMessage className={styles.errorMessage} name="payment_type" component="div" />
                     </Box>
-                    <ErrorMessage className={styles.errorMessage} name="payment_type" component="div" />
                   </Box>
                 </Box>
-              </Box>
-              <Box>
-                <Box className={styles.sumPrice}>
-                  <Heading className={styles.heading}>
-                    Сумма заказа
-                  </Heading>
-                  <Text>Стоимость товаров: {formattedNumber} сум</Text>
+                <Box>
+                  <Box className={styles.sumPrice}>
+                    <Heading className={styles.heading}>
+                      Сумма заказа
+                    </Heading>
+                    <Text>Стоимость товаров: {formattedNumber} сум</Text>
+                  </Box>
+                  <Button type='submit' className={styles.confirmBtn}>Подтвердить заказ</Button>
                 </Box>
-                <Button type='submit' className={styles.confirmBtn}>Подтвердить заказ</Button>
-              </Box>
-            </Form>
-          )}
-        </Formik>
-        <Box mb={'24px'}>
-          <Maps setAddressInfo={setAddressInfo} />
-        </Box>
-        {products && <Box className={styles.yourOrders}>
-          <Heading className={styles.heading}>Ваш заказ</Heading>
-          {products.map(el => (
-            <CheckoutCard el={el} key={el.guid} />
-          ))}
-        </Box>}
-      </Container>
+              </Form>
+            )}
+          </Formik>
+          <Box mb={'24px'}>
+            <Maps setAddressInfo={setAddressInfo} />
+          </Box>
+          {products && <Box className={styles.yourOrders}>
+            <Heading className={styles.heading}>Ваш заказ</Heading>
+            {products.map(el => (
+              <CheckoutCard el={el} key={el.guid} />
+            ))}
+          </Box>}
+        </Container>
+      </Box>
     </Box>
-  </Box>
-)
+  )
 }

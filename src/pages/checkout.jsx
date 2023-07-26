@@ -6,9 +6,7 @@ const Home = (props) => {
   return (
     <>
       <SEO />
-      <MainLayout products={props.products} category={props.category}>
         <CheckoutPage data={props} />
-      </MainLayout>
     </>
   )
 }

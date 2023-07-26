@@ -1,5 +1,5 @@
 module.exports = {
-	locales: ['ru', 'en', 'uz'],
+	locales: ['ru'],
 	defaultLocale: 'ru',
 	defaultNS: 'common',
 	loadLocaleFrom: (lang, ns) =>

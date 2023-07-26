@@ -3,11 +3,6 @@ import {
   Button,
   FormControl,
   Input,
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
-  useDisclosure
 } from '@chakra-ui/react'
 import ReactPaginate from 'react-paginate';
 import { ChevronRightIcon } from '@chakra-ui/icons'
@@ -27,7 +22,7 @@ const Header = ({ data, category }) => {
   const catalogBtnRef = useRef(null);
   const inputRef = useRef(null);
   const [open, setOpen] = useState(false)
-  const [searchVallue, setSearchVallue] = useState()
+  const [searchVallue, setSearchVallue] = useState([])
   const [categoryValue, setCategoryValue] = useState()
 
   const categoryFilter = category?.filter(el => !el.categories_id) || []
@@ -37,7 +32,7 @@ const Header = ({ data, category }) => {
     function handleClickOutside(event) {
       if (contentRef.current && !contentRef.current.contains(event.target)) {
         inputRef.current.value = ''
-        setSearchVallue()
+        setSearchVallue([])
       }
       if (catalogRef.current && !catalogRef.current.contains(event.target)
         && catalogBtnRef.current && !catalogBtnRef.current.contains(event.target)) {
@@ -54,7 +49,7 @@ const Header = ({ data, category }) => {
 
   const click = () => {
     inputRef.current.value = ''
-    setSearchVallue()
+    setSearchVallue([])
   }
 
   const md = useResponsive('md')
@@ -70,8 +65,8 @@ const Header = ({ data, category }) => {
     const value = e.target.value
     setSearchVallue(
       value.length > 0
-        ? data.filter((el) => true == el.name.toLowerCase().includes(value))
-        : ''
+        ? data.filter((el) => true == el.name.toLowerCase().includes(value.toLowerCase()))
+        : []
     )
   }
 
@@ -109,9 +104,10 @@ const Header = ({ data, category }) => {
         </Button>
       </FormControl>
       <Box className={styles.searchList}>
-        {searchVallue &&
+        {/*{console.log(searchVallue)}*/}
+        {searchVallue.length > 0 &&
           searchVallue.map((el) => (
-            <Link href={`/product/${el.guid}`} onClick={() => click()} className={styles.item} key={el.guid}>
+            <Link href={`/product/${el.guid}`} onClick={() => click()} className={styles.searchItem} key={el.guid}>
               <SearchIcon color={'black'} />
               <span className={styles.span}>{el.name}</span>
             </Link>
@@ -155,7 +151,7 @@ const Header = ({ data, category }) => {
           )}
         </Container>
       </Box>
-      <Box className={searchVallue ? styles.fon : ''}></Box>
+      <Box className={searchVallue.length > 0 ? styles.fon : ''}></Box>
       {open && <Box className={styles.catalogSection}>
         <Box className={styles.catalogFon}>
           <Box ref={catalogRef} className={styles.box}>

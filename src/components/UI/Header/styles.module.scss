@@ -94,7 +94,7 @@
         min-height: 50px;
         padding-top: 10px;
 
-        .item {
+        .searchItem {
           max-width: 517px !important;
           width: 100%;
           padding: 5px 20px;
@@ -177,7 +177,7 @@
     height: 100vh;
     top: 72px;
     left: 0;
-    
+
     &>.box {
       padding: 20px;
       background: #fff;
@@ -195,12 +195,15 @@
         border-radius: 8px;
         margin-bottom: 20px;
       }
+
       .list {
         max-width: 348px;
         width: 100%;
+
         @include breakpoint('md') {
           max-width: none;
         }
+
         .item {
           cursor: pointer;
           width: 100%;
@@ -213,10 +216,10 @@
           font-weight: 600;
           color: #232F3E;
           border-radius: 8px;
+
           &:hover {
             background: #FFFFFF;
           }
-
         }
       }
     }

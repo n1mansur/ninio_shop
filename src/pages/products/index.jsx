@@ -16,7 +16,6 @@ export default function ProductsPage({ products = [], category }) {
   const lastPostIndex = currentPage * count
   const firstPostIndex = lastPostIndex - count
   const data = products?.filter(el => el.status)?.slice(firstPostIndex, lastPostIndex)
-
   return (
     <>
       <SEO />

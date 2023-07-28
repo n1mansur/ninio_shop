@@ -28,12 +28,12 @@ export default function BasketCard({ el, toFavorite, setProducts }) {
     localStorage.setItem('toFavorites', JSON.stringify(tofavoriteProducts))
   }
 
-  //useEffect(() => {
-  //  let products = JSON.parse(localStorage.getItem('products')) || []
-  //  products = products.map(old => old.guid == el.guid ? { ...old, quantity: quantity } : old)
-  //  setProducts(products)
-  //  localStorage.setItem('products', JSON.stringify(products))
-  //}, [quantity])
+  useEffect(() => {
+    let products = JSON.parse(localStorage.getItem('products')) || []
+    products = products.map(old => old.guid == el.guid ? { ...old, quantity: quantity } : old)
+    setProducts(products)
+    localStorage.setItem('products', JSON.stringify(products))
+  }, [quantity])
 
   useEffect(() => {
     let tofavoriteProducts = JSON.parse(localStorage.getItem('toFavorites')) || []

@@ -3,7 +3,7 @@ import SEO from '@/components/SEO'
 import MainLayout from '@/components/Layouts/MainLayout'
 import styles from './index.module.scss'
 import Container from '@/components/UI/Container'
-import { Box, Heading, SimpleGrid } from '@chakra-ui/react'
+import { Box, Heading, SimpleGrid, Spinner } from '@chakra-ui/react'
 import { productsService } from '@/services/productsService.js'
 import { categoryService } from '@/services/categoryService'
 import { useRouter } from 'next/router'
@@ -11,8 +11,9 @@ import ProductCard from '@/components/UI/ProductCard'
 import Pagination from '../../components/UI/Pagination'
 
 
-export default function ProductsPage({ category }) {
+export default function ProductsPage({products:headerProducts, category }) {
   const [currentPage, setCurrentPage] = useState(1)
+  const [load, SetLoad] = useState(true)
   const [count, setCount] = useState(10)
   const lastPostIndex = currentPage * count
   const firstPostIndex = lastPostIndex - count
@@ -21,29 +22,27 @@ export default function ProductsPage({ category }) {
   const router = useRouter()
 
   useEffect(() => {
+    SetLoad(true)
     productsService.getList(
       {
         data:
         {
           with_relations: true,
+          [router.query.type]: router.query.id
         },
         offset: 0
       }
     ).then(res => setProducts(res.data.response))
+      .finally(() => SetLoad(false))
   }, []);
-  console.log(products)
 
-  const mainData = []
-  // = products?.filter(el => el.main_category === router.query.guid)
-  const brandsData = []
-  // = products?.filter(el => el.brands_id === router.query.guid)
-
-  //console.log(products);
   const data = products?.filter(el => el.status)?.slice(firstPostIndex, lastPostIndex)
 
-console.log(data)
-  return (
-    <>
+  return (load
+    ? <Box w={'100vw'} h={'100vh'} display={'flex'} alignItems={'center'} justifyContent={'center'}>
+      <Spinner />
+    </Box>
+    : <>
       <SEO />
       <MainLayout products={products} category={category} wrapperSty={styles.bg}>
         <Container>
@@ -61,7 +60,7 @@ console.log(data)
               setCurrentPage={setCurrentPage}
               setCount={setCount}
               currentPage={currentPage}
-              />
+            />
           </Box>}
         </Container>
       </MainLayout >
@@ -74,6 +73,7 @@ export async function getServerSideProps(context) {
     const [categoryData, productsData] =
       await Promise.all([
         categoryService.getList({ data: { with_relations: true } }),
+        productsService.getList({ data: { with_relations: true } }),
       ])
     return {
       props: {

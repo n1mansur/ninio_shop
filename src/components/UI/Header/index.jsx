@@ -25,7 +25,6 @@ const Header = ({ data, category }) => {
   const [searchVallue, setSearchVallue] = useState([])
   const [categoryValue, setCategoryValue] = useState()
   const md = useResponsive('md')
-
   const categoryFilter = category?.filter(el => !el.categories_id) || []
   const filteredCategory = category?.filter(el => el.categories_id === categoryValue) || []
 
@@ -157,7 +156,7 @@ const Header = ({ data, category }) => {
             <Box className={styles.list}>
               {categoryFilter.map(el => (
                 <Box onClick={() => setCategoryValue(el.guid)} className={styles.item} key={el.guid}>
-                  <Link href={`/products/${el.guid}`} onClick={() => catalogFn()} color={'#000'}>{el.name}</Link>
+                  <Link href={`/products/main_category?id=${el.guid}`} onClick={() => catalogFn()} color={'#000'}>{el.name}</Link>
                   {!md && <ChevronRightIcon />}
                 </Box>
               ))}
@@ -165,7 +164,7 @@ const Header = ({ data, category }) => {
             {filteredCategory &&
               <Box className={styles.list}>
                 {filteredCategory?.map(el => (
-                  <Link href={`/products/${el.guid}`} className={styles.item} onClick={() => catalogFn()} key={el.guid}>
+                  <Link href={`/products/category_id?id=${el.guid}`} className={styles.item} onClick={() => catalogFn()} key={el.guid}>
                     {el.name}
                     <ChevronRightIcon />
                   </Link>

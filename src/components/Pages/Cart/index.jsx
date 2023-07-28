@@ -19,7 +19,7 @@ export default function Cart() {
   }, []);
 
   const sum = products.reduce((accumulator, currentValue) => {
-    return accumulator + currentValue.sell_price;
+    return accumulator + currentValue.sell_price * currentValue.quantity;
   }, 0);
 
   const clearAll = () => {

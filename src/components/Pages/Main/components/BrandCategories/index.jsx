@@ -12,7 +12,7 @@ export default function BrandCategories({ data}) {
       <Heading className={styles.heading}>Продукты от всех брендов</Heading>
       <Box className={styles.cards}>
         {brands && brands.map(brand => (
-          <Link href={`/products/${brand.guid}`} className={styles.card} key={brand.guid}>
+          <Link href={`/products/brands_id?id=${brand.guid}`} className={styles.card} key={brand.guid}>
             {
               brand.photo
                 ? <Img src={brand.photo} alt={brand.name} className={styles.cardImg} />

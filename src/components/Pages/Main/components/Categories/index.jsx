@@ -11,7 +11,7 @@ export default function Categories({ data }) {
       <Heading className={styles.heading}>Товары по категориям</Heading>
       <Box className={styles.cards}>
         {category.map((el) => (
-          <Link href={`/products/${el.guid}`} className={styles.card} key={el.guid}>
+          <Link href={`/products/main_category?id=${el.guid}`} className={styles.card} key={el.guid}>
            <Box className={styles.cardImg}>
             <img src={el.photo} alt={el?.name} />
            </Box>

@@ -9,15 +9,11 @@ import Script from 'next/script'
 import { Box, Heading, Link, Text } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
 const Footer = () => {
-  const socialsIcons = {
-    "telegram": <TelegramIcon />,
-    "instagram": <InstagramIcon />,
-    "facebook": <FacebookIcon />
-  }
+
   const [footerData, setFooterData] = useState();
 
   useEffect(() => {
-    footerService?.getList({ data: { with_relations: true }, offset: 1, limit: 10 }).then(res => setFooterData(res?.data?.data?.data?.response))
+    footerService?.getList({ data: { with_relations: true }, offset: 0 }).then(res => setFooterData(res?.data?.data?.data?.response))
   }, []);
 
   const numbers = footerData?.filter(el => el?.social_media[0] == 'phone') || []

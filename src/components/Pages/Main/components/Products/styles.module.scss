@@ -1,10 +1,11 @@
-
 .products {
   display: flex;
   gap: 20px;
-  overflow: scroll;
+  //overflow: scroll;
   margin-bottom: 24px;
-  &::-webkit-scrollbar{
-  display: none;
+  justify-items: center;
+
+  &::-webkit-scrollbar {
+    display: none;
   }
 }

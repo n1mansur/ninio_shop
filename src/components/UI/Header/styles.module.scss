@@ -93,6 +93,9 @@
         border-radius: 12px;
         min-height: 50px;
         padding-top: 10px;
+        max-height: 500px;
+        overflow: scroll;
+        width: 100%;
 
         .searchItem {
           max-width: 517px !important;
@@ -101,6 +104,12 @@
           white-space: nowrap;
           display: flex;
           gap: 10px;
+          transition: 0.3s all;
+
+          &:hover {
+            padding: 5px 10px;
+            background: #c4c4c4;
+          }
 
           &>svg {
             min-width: 20px;

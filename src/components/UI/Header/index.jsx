@@ -24,6 +24,7 @@ const Header = ({ data, category }) => {
   const [open, setOpen] = useState(false)
   const [searchVallue, setSearchVallue] = useState([])
   const [categoryValue, setCategoryValue] = useState()
+  const md = useResponsive('md')
 
   const categoryFilter = category?.filter(el => !el.categories_id) || []
   const filteredCategory = category?.filter(el => el.categories_id === categoryValue) || []
@@ -51,8 +52,6 @@ const Header = ({ data, category }) => {
     inputRef.current.value = ''
     setSearchVallue([])
   }
-
-  const md = useResponsive('md')
 
   const catalogFn = (e, toggle = 'auto') => {
     md && e?.stopPropagation()
@@ -103,16 +102,16 @@ const Header = ({ data, category }) => {
           <SearchIcon />
         </Button>
       </FormControl>
-      <Box className={styles.searchList}>
-        {/*{console.log(searchVallue)}*/}
-        {searchVallue.length > 0 &&
-          searchVallue.map((el) => (
-            <Link href={`/product/${el.guid}`} onClick={() => click()} className={styles.searchItem} key={el.guid}>
-              <SearchIcon color={'black'} />
-              <span className={styles.span}>{el.name}</span>
-            </Link>
+      {searchVallue.length > 0 &&
+        <Box className={styles.searchList}>
+          {searchVallue.map((el) => (
+          <Link href={`/product/${el.guid}`} onClick={() => click()} className={styles.searchItem} key={el.guid}>
+            <SearchIcon color={'black'} />
+            <span className={styles.span}>{el.name}</span>
+          </Link>
           ))}
-      </Box>
+        </Box>
+      }
     </Box>
   )
   const headerBtns = (

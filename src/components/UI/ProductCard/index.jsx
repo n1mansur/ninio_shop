@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Box, Button, Image, Text } from '@chakra-ui/react'
+import { Box, Button, Image, Text, Tooltip } from '@chakra-ui/react'
 import Link from 'next/link'
 import { HeartIcon } from '@/components/svg'
 import styles from './styles.module.scss'
@@ -78,11 +78,13 @@ export default function ProductCard({ el }) {
             {el.categories_id_data.name}
           </Text>
           <Text className={styles.productName}>
-            <span>{el.name}</span>
+            <Tooltip label={el.name}  aria-label='A tooltip'>
+              <span>{el.name}</span>
+            </Tooltip>
           </Text>
           <Text className={styles.productPrice}>{formattedNumber} Сум</Text>
         </Box>
-          <Button className={styles.buyBtn}>Добавить</Button>
+        <Button className={styles.buyBtn}>Добавить</Button>
       </Box>
     </Box>
   )

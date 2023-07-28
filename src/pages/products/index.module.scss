@@ -5,15 +5,14 @@
 .bg {
   background: rgba(246, 246, 246, 1);
 }
-
-.productsPage{
+.productsSection{
   padding-top: 150px;
 }
 .cards {
-  display: flex;
-  overflow: scroll;
-  width: 100%;
-  gap: 24px;
+  //display: flex;
+  //overflow: scroll;
+  //width: 100%;
+  //gap: 24px;
 
   &::-webkit-scrollbar {
     display: none;

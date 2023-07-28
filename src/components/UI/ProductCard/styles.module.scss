@@ -12,12 +12,13 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  @include breakpoint('md') {
-    min-width:  230px;
-    height: 400px;
-  }
   &:hover {
     box-shadow: 0 0 5px rgba(128, 128, 128, 0.3);
+    transform: scale(1.04, 1.04);
+  }
+  @include breakpoint('md') {
+    width: 100%;
+    height: 400px;
   }
 
   .heroSection {
@@ -74,7 +75,8 @@
       margin-bottom: 4px;
       max-height: 40px;
       white-space: nowrap;
-      overflow: scroll;
+      overflow: hidden;
+      text-overflow: ellipsis;
       &::-webkit-scrollbar {
         display: none;
       }

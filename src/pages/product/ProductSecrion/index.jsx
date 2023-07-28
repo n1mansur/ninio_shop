@@ -94,7 +94,7 @@ export default function ProductSecrion({ el }) {
           <Text className={styles.text}>{formattedNumber} сум</Text>
           <hr className={styles.hr} />
           <Box className={styles.dFlex}>
-            <Text className={styles.characteristics}>Характеристики</Text>
+            <Text className={styles.characteristics}>О продукте</Text>
             <Button
               bg={!md && toggle?.length > 0 ? '#84919A' : 'none'}
               onClick={() => toFavoritesProduct(el)}

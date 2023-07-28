@@ -6,7 +6,7 @@
 .products {
   display: flex;
   gap: 20px;
-  overflow: scroll;
+  //overflow: scroll;
 
   &::-webkit-scrollbar {
     display: none;

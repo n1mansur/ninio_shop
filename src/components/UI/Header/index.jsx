@@ -13,7 +13,7 @@ import Link from 'next/link'
 import { useResponsive } from '@/hooks/useResponsive'
 import styles from './styles.module.scss'
 import { CartIcon, DeleteIcon, HeartIcon, MBurgerIcon, SearchIcon } from '@/components/svg'
-import { useProductsQuery } from '@/services/productsService'
+import { productsService } from '@/services/productsService'
 
 
 const Header = ({ data, category }) => {
@@ -22,7 +22,8 @@ const Header = ({ data, category }) => {
   const catalogBtnRef = useRef(null);
   const inputRef = useRef(null);
   const [open, setOpen] = useState(false)
-  const [searchVallue, setSearchVallue] = useState([])
+  const [searchProducts, setSearchProducts] = useState([])
+  const [searchValue, setSearchValue] = useState('')
   const [categoryValue, setCategoryValue] = useState()
   const md = useResponsive('md')
   const categoryFilter = category?.filter(el => !el.categories_id) || []
@@ -32,7 +33,7 @@ const Header = ({ data, category }) => {
     function handleClickOutside(event) {
       if (contentRef.current && !contentRef.current.contains(event.target)) {
         inputRef.current.value = ''
-        setSearchVallue([])
+        setSearchProducts([])
       }
       if (catalogRef.current && !catalogRef.current.contains(event.target)
         && catalogBtnRef.current && !catalogBtnRef.current.contains(event.target)) {
@@ -49,7 +50,7 @@ const Header = ({ data, category }) => {
 
   const click = () => {
     inputRef.current.value = ''
-    setSearchVallue([])
+    setSearchProducts([])
   }
 
   const catalogFn = (e, toggle = 'auto') => {
@@ -61,11 +62,18 @@ const Header = ({ data, category }) => {
 
   const onChange = (e) => {
     const value = e.target.value
-    setSearchVallue(
-      value.length > 0
-        ? data.filter((el) => true == el.name.toLowerCase().includes(value.toLowerCase()))
-        : []
-    )
+    value ? productsService.getList(
+      {
+        data:
+        {
+          with_relations: true,
+          name: value
+        },
+        offset: 0
+      }
+    ).then(res => setSearchProducts(res.data.response))
+      : setSearchProducts([])
+    setSearchValue(value)
   }
 
   const linkLogo = (
@@ -97,17 +105,17 @@ const Header = ({ data, category }) => {
     >
       <FormControl className={styles.formControl} onChange={onChange}>
         <Input borderRightRadius={'0'} className={styles.input} ref={inputRef} type="text" placeholder='Поиск товаров' />
-        <Button borderLeftRadius={'0'} className={styles.formBtn} type="submit">
+        <Button onClick={()=>window.location.href=`/products/name?id=${searchValue}`} borderLeftRadius={'0'} className={styles.formBtn} type="submit">
           <SearchIcon />
         </Button>
       </FormControl>
-      {searchVallue.length > 0 &&
+      {searchProducts.length > 0 &&
         <Box className={styles.searchList}>
-          {searchVallue.map((el) => (
-          <Link href={`/product/${el.guid}`} onClick={() => click()} className={styles.searchItem} key={el.guid}>
-            <SearchIcon color={'black'} />
-            <span className={styles.span}>{el.name}</span>
-          </Link>
+          {searchProducts.map((el) => (
+            <Link href={`/product/${el.guid}`} onClick={() => click()} className={styles.searchItem} key={el.guid}>
+              <SearchIcon color={'black'} />
+              <span className={styles.span}>{el.name}</span>
+            </Link>
           ))}
         </Box>
       }
@@ -149,7 +157,7 @@ const Header = ({ data, category }) => {
           )}
         </Container>
       </Box>
-      <Box className={searchVallue.length > 0 ? styles.fon : ''}></Box>
+      <Box className={searchProducts.length > 0 ? styles.fon : ''}></Box>
       {open && <Box className={styles.catalogSection}>
         <Box className={styles.catalogFon}>
           <Box ref={catalogRef} className={styles.box}>

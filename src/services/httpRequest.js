@@ -8,6 +8,7 @@ export const httpRequest = axios.create({
     ['X-API-KEY']: 'P-3zr6vqkCPw6z30rwKxnIO1DEWMyMA6ge',
   },
 })
+
 export const httpSingleRequest = axios.create({
   baseURL: 'https://api.admin.u-code.io/v1/object/',
   timeout: 100000,

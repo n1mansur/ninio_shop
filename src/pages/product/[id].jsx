@@ -5,7 +5,7 @@ import { categoryService } from '@/services/categoryService.js'
 import SEO from '@/components/SEO'
 import MainLayout from '@/components/Layouts/MainLayout'
 import Container from '@/components/UI/Container'
-import { Box, Heading} from '@chakra-ui/react'
+import { Box, Heading, SimpleGrid} from '@chakra-ui/react'
 import styles from './styles.module.scss'
 import Product from './ProductSecrion'
 import ProductCard from '@/components/UI/ProductCard'
@@ -25,9 +25,9 @@ export default function ProductPage({products, category}) {
           {productData && <Product el={productData} />}
           {similar.length > 0 ? <Box mb={'24px'}>
             <Heading fontWeight={'600'} fontSize={'30px'} mb={'24px'}>Похожие товары</Heading>
-            <Box className={styles.cards} >
+            <SimpleGrid columns={[1, 2, 3, 4]} spacing={'20px'}  className={styles.cards} >
               {similar.map(el => <ProductCard el={el} key={el.guid} />)}
-            </Box>
+            </SimpleGrid>
           </Box> :
             <Heading fontWeight={'600'} textAlign={'center'} fontSize={'30px'} mb={'24px'}>Похожих товаров нет</Heading>
           }

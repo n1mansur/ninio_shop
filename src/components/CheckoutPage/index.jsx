@@ -53,9 +53,9 @@ export default function CheckoutPage() {
   const goBack = () => {
     history.go(-1)
   }
-  //console.log(addressInfo);
+  
   const formattedNumber = sumWithInitial?.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1 ');
-  //console.log(addressInfo, 'addressInfo');
+  
   const onSubmit = (values) => {
     if (!addressInfo) {
       toast({

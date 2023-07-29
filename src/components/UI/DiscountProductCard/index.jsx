@@ -14,7 +14,6 @@ export default function DiscountProductCard({ el, discount }) {
     const diff = Math.floor((today - date) / (1000 * 60 * 60 * 24))
     return diff < 7
   }
-  console.log(discount);
 
   //useEffect(() => {
   //  let tofavoriteProducts = JSON.parse(localStorage.getItem('toFavorites')) || []

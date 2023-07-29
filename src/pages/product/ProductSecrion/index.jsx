@@ -11,7 +11,6 @@ export default function ProductSecrion({ el, discount = false }) {
   const [isOpen, setIsOpen] = useState('Video');
   const [tofavorite, setTofavorite] = useState([]);
   const md = useResponsive('md')
-  console.log(discount)
 
   const router = useRouter();
   const toast = useToast()

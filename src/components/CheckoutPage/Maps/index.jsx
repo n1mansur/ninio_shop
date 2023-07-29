@@ -25,14 +25,10 @@ export default function Maps({ setAddressInfo }) {
     const coordinates = e.get('coords');
     setPlacemarkGeometry(coordinates);
     setAddressInfo({ resultCoordinates: coordinates })
-    //console.log(e)
   };
 
   const handleResultShow = (e) => {
     setPlacemarkGeometry(e.originalEvent.target._yandexState._model.resultCoordinates)
-    //const selected = e.get('target').getResultsArray();
-    //console.log(e);
-    //console.log({ request: e.originalEvent.target._yandexState._model.request, resultCoordinates: e.originalEvent.target._yandexState._model.resultCoordinates });
     setTimeout(() => {
       setAddressInfo({
         request: e.originalEvent.target._yandexState._model.request,

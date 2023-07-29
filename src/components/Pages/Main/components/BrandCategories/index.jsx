@@ -4,9 +4,8 @@ import { Box, Card, Heading, Img, Text } from '@chakra-ui/react'
 import Link from 'next/link'
 
 export default function BrandCategories({ data}) {
-  //const category = data.filter((el) => el)
+
   const brands = data.brands
-  //console.log(data, 'BrandCategories');
   return (
     <Box className={styles.brandCategories}>
       <Heading className={styles.heading}>Продукты от всех брендов</Heading>

@@ -17,7 +17,6 @@ export default function ProductPage({products, category}) {
   const [discountProduct, setDiscountProduct] = useState();
   const [load, SetLoad] = useState(true);
   const discount = router.query?.discount || false
-//console.log(router.query);
 
 useEffect(() => {
   SetLoad(true)
@@ -33,7 +32,6 @@ useEffect(() => {
   ).then(res => setDiscountProduct(res.data.response))
     .finally(() => SetLoad(false))
 }, []);
-//console.log(discountProduct);
 
   const productData = products?.filter(el => el.guid == router.query.id)?.[0]
   const similar = products?.filter(el => el.categories_id == productData?.categories_id && el.guid != router.query.id && el.status)

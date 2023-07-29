@@ -7,12 +7,12 @@ import { discountsService } from '../../../../../services/discountsService'
 import DiscountProductCard from '../../../../UI/DiscountProductCard'
 
 export default function Products({ data }) {
-  const products = data.slice(0, 8)
+  const products = data.filter(el => el.status).slice(0, 8)
   const [dis, setDis] = useState([]);
   useEffect(() => {
     discountsService?.getList({ data: { with_relations: true } }).then(res => setDis(res.data.response))
   }, []);
-  //console.log(dis);
+
   return (
     <Box mb={'24px'}>
       <SimpleGrid columns={[1, 2, 3, 4]} spacing={'20px'} className={styles.products}>
@@ -24,12 +24,12 @@ export default function Products({ data }) {
       </SimpleGrid>
       <SimpleGrid columns={[1, 2, 3, 4]} spacing={'20px'} className={styles.products}>
         {products && products.map((el) => {
-          return el.status ? (
+          return (
             <ProductCard el={el} key={el.guid} />
-          ) : null
+          )
         })}
       </SimpleGrid>
-      {data.length > 8 && <Box w={'100%'} display={'flex'} justifyContent={'end'}>
+      {products.length > 8 && <Box w={'100%'} display={'flex'} justifyContent={'end'}>
         <Link href={`/products/`}>Смотреть все</Link>
       </Box>}
     </Box>

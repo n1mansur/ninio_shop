@@ -38,7 +38,7 @@ export default function DiscountProductCard({ el, discount }) {
 
   return (
     <Box onClick={() => {
-      window.location.href = `/product/${el.guid}`
+      window.location.href = `/product/${discount.guid}?discount=true`
     }}
       w={'auto'}
       h={'auto'}

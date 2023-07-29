@@ -7,15 +7,19 @@ import YoutubePlayer from '@/components/UI/YoutubePlayer';
 import { HeartIcon } from '@/components/svg'
 import { useResponsive } from '@/hooks/useResponsive'
 
-export default function ProductSecrion({ el }) {
+export default function ProductSecrion({ el, discount = false }) {
   const [isOpen, setIsOpen] = useState('Video');
   const [tofavorite, setTofavorite] = useState([]);
   const md = useResponsive('md')
+  console.log(discount)
 
   const router = useRouter();
   const toast = useToast()
   const [quantity, setQuantity] = useState(1);
-  const formattedNumber = el?.sell_price?.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1 ');
+
+  const formattedNumber = el?.sell_price?.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1 ')
+  const discountFormatted = discount?.new_price?.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1 ')
+  const price = !discountFormatted ? formattedNumber : discountFormatted
 
   const warningFn = () => {
     toast({
@@ -41,10 +45,10 @@ export default function ProductSecrion({ el }) {
     localStorage.setItem('toFavorites', JSON.stringify(tofavoriteProducts))
   }
 
-  const toggle = tofavorite?.filter(old => old === el.guid)
+  const toggle = discount && tofavorite?.filter(old => old === el?.guid)
 
   const addedFn = (products) => {
-    products.push({ ...el, quantity })
+    products.push({ ...el, quantity, sell_price: price })
     toast({
       title: `Добавлено`,
       status: 'success',
@@ -91,11 +95,12 @@ export default function ProductSecrion({ el }) {
           <Heading className={styles.heading}>
             {el?.name}
           </Heading>
-          <Text className={styles.text}>{formattedNumber} сум</Text>
+          {discount && <Text className={styles.oldPrice}>не {formattedNumber} сум</Text>}
+          <Text className={styles.text}>{price} сум</Text>
           <hr className={styles.hr} />
           <Box className={styles.dFlex}>
             <Text className={styles.characteristics}>О продукте</Text>
-            <Button
+            {!discount && <Button
               bg={!md && toggle?.length > 0 ? '#84919A' : 'none'}
               onClick={() => toFavoritesProduct(el)}
               color={toggle?.length > 0 ? '#fff' : '#000'}
@@ -105,7 +110,7 @@ export default function ProductSecrion({ el }) {
                   ? <HeartIcon bg={toggle?.length > 0 ? '#84919A' : 'none'} />
                   : 'Избранное'
               }
-            </Button>
+            </Button>}
           </Box>
           <div className={styles.cardInfo}>
             <Text>Объем</Text>

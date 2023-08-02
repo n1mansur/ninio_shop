@@ -15,14 +15,14 @@ export default function Products({ data }) {
 
   return (
     <Box mb={'24px'}>
-      <SimpleGrid columns={[1, 2, 3, 4]} spacing={'20px'} className={styles.products}>
+      <Box  display={'flex'} overflow={'scroll'} gap={'10px'} mb={'24px'}>
         {dis && dis.map((el) => {
           return (
             <DiscountProductCard el={el.products_id_data} discount={el} key={el.guid} />
           )
         })}
-      </SimpleGrid>
-      <SimpleGrid columns={[1, 2, 3, 4]} spacing={'20px'} className={styles.products}>
+      </Box>
+      <SimpleGrid columns={[1, 2, 3, 4]} spacing={'15px'} >
         {products && products.map((el) => {
           return (
             <ProductCard el={el} key={el.guid} />

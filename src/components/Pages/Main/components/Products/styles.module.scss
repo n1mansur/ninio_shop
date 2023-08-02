@@ -1,9 +1,17 @@
+@import '@/styles/breakpoints';
+
 .products {
   display: flex;
   gap: 20px;
+  grid-gap: 20px;
   //overflow: scroll;
   margin-bottom: 24px;
   justify-items: center;
+
+  @include breakpoint('md') {
+    grid-gap: 10px;
+
+  }
 
   &::-webkit-scrollbar {
     display: none;

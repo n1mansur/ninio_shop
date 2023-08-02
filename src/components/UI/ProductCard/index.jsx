@@ -40,6 +40,7 @@ export default function ProductCard({ el }) {
     }}
       w={'auto'}
       h={'auto'}
+      className={styles.productCard}
     >
       <Box
         className={styles.product} key={el.guid}

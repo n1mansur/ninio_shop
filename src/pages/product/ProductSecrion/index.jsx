@@ -16,9 +16,9 @@ export default function ProductSecrion({ el, discount = false }) {
   const toast = useToast()
   const [quantity, setQuantity] = useState(1);
 
-  const formattedNumber = el?.sell_price?.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1 ')
-  const discountFormatted = discount?.new_price?.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1 ')
-  const price = !discountFormatted ? formattedNumber : discountFormatted
+  const formattedNumber = el?.sell_price
+  const discountFormatted = discount?.new_price
+  const price = (!discountFormatted ? formattedNumber : discountFormatted)?.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1 ')
 
   const warningFn = () => {
     toast({
@@ -47,7 +47,7 @@ export default function ProductSecrion({ el, discount = false }) {
   const toggle = discount && tofavorite?.filter(old => old === el?.guid)
 
   const addedFn = (products) => {
-    products.push({ ...el, quantity, sell_price: price })
+    products.push({ ...el, quantity, sell_price: !discountFormatted ? formattedNumber : discountFormatted })
     toast({
       title: `Добавлено`,
       status: 'success',

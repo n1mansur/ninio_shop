@@ -19,7 +19,7 @@ export default function Cart() {
   }, []);
 
   const sum = products.reduce((accumulator, currentValue) => {
-    return accumulator + currentValue.sell_price * currentValue.quantity;
+    return accumulator + Number(currentValue.sell_price) * currentValue.quantity;
   }, 0);
 
   const clearAll = () => {
@@ -66,6 +66,7 @@ export default function Cart() {
             <Flex className={styles.flex}>
               <Text>Всего: {products.length} товара</Text>
               <Text className={styles.sum}>
+                {/*{console.log(sum)}*/}
                 {sum.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1 ')} сум
               </Text>
             </Flex>

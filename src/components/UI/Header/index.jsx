@@ -4,7 +4,6 @@ import {
   FormControl,
   Input,
 } from '@chakra-ui/react'
-import ReactPaginate from 'react-paginate';
 import { ChevronRightIcon } from '@chakra-ui/icons'
 import Container from '@/components/UI/Container'
 import Logo from '@/components/UI/Logo'
@@ -76,6 +75,11 @@ const Header = ({ data, category }) => {
     setSearchValue(value)
   }
 
+  const onSubmit = (e) => {
+    e.preventDefault()
+    window.location.href = `/products/name?id=${searchValue}`
+  }
+
   const linkLogo = (
     <Link className={styles.linkLogo} href="/">
       <Logo className={styles.logo} />
@@ -103,12 +107,19 @@ const Header = ({ data, category }) => {
       className={styles.form}
       ref={contentRef}
     >
-      <FormControl className={styles.formControl} onChange={onChange}>
+      <form
+        onSubmit={(e) => onSubmit(e)}
+        className={styles.formControl}
+        onChange={onChange}>
         <Input borderRightRadius={'0'} className={styles.input} ref={inputRef} type="text" placeholder='Поиск товаров' />
-        <Button onClick={()=>window.location.href=`/products/name?id=${searchValue}`} borderLeftRadius={'0'} className={styles.formBtn} type="submit">
+        <Button
+          //onClick={() => window.location.href = `/products/name?id=${searchValue}`}
+          borderLeftRadius={'0'}
+          className={styles.formBtn}
+          type="submit">
           <SearchIcon />
         </Button>
-      </FormControl>
+      </form>
       {searchProducts.length > 0 &&
         <Box className={styles.searchList}>
           {searchProducts.map((el) => (
@@ -163,7 +174,11 @@ const Header = ({ data, category }) => {
           <Box ref={catalogRef} className={styles.box}>
             <Box className={styles.list}>
               {categoryFilter.map(el => (
-                <Box onClick={() => setCategoryValue(el.guid)} className={styles.item} key={el.guid}>
+                <Box
+                  onMouseEnter={() => setCategoryValue(el.guid)}
+                  //onClick={() => setCategoryValue(el.guid)}
+                  className={styles.item}
+                  key={el.guid}>
                   <Link href={`/products/main_category?id=${el.guid}`} onClick={() => catalogFn()} color={'#000'}>{el.name}</Link>
                   {!md && <ChevronRightIcon />}
                 </Box>

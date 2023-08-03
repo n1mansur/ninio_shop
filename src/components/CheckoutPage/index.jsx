@@ -68,7 +68,6 @@ export default function CheckoutPage() {
 
     } else {
       const index = values.telegram_nickname.lastIndexOf('@')
-
       //console.log(
       //  Object.assign({},
       //    {
@@ -106,6 +105,10 @@ export default function CheckoutPage() {
         duration: 4000,
         isClosable: true,
       })
+      setTimeout(() => {
+        localStorage.setItem('products', JSON.stringify([]))
+        window.location.href = '/'
+      }, 500);
     }
 
   }

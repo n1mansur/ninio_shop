@@ -23,7 +23,7 @@ export default function ProductsPage({ products = [], category }) {
         <Container position={'relative'}>
           <Box className={styles.productsSection} mb={'24px'}>
             {data?.length > 0
-              ? <SimpleGrid columns={[1, 2, 3, 4]} spacing={'20px'} className={styles.cards} >
+              ? <SimpleGrid columns={[ 2, 3, 4]} spacing={'20px'} className={styles.cards} >
                 {data?.map(el => el?.status && <ProductCard el={el} key={el.guid} />)}
               </SimpleGrid>
               : <Heading>Товары закончились</Heading>

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React from 'react'
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react'
 
@@ -9,7 +9,7 @@ import 'swiper/css/pagination'
 
 import styles from './styles.module.scss'
 
-import { Navigation, Pagination, Mousewheel, Keyboard } from 'swiper'
+import { Navigation, Pagination, Mousewheel, Keyboard, Autoplay } from 'swiper'
 import Link from 'next/link'
 import { useResponsive } from '@/hooks/useResponsive'
 
@@ -23,7 +23,12 @@ export default function Slider({ data }) {
         pagination={true}
         mousewheel={true}
         keyboard={true}
-        modules={[Navigation, Pagination, Mousewheel, Keyboard]}
+        rewind={true}
+        autoplay={{
+          delay: 2500,
+          disableOnInteraction: false,
+        }}
+        modules={[Autoplay, Navigation, Pagination, Mousewheel, Keyboard]}
         className="mySwiper"
       >
         {data.map((el) => (

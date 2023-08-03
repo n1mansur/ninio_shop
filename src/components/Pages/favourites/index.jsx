@@ -22,7 +22,7 @@ export default function Favorites({ products: data }) {
     <Box className={styles.favorites}>
       <Container>
         {toFavoriteProducts?.length > 0
-          ? <SimpleGrid columns={[1, 2, 3, 4]} spacing={'20px'} className={styles.products}>
+          ? <SimpleGrid columns={[ 2, 3, 4]} spacing={'20px'} className={styles.products}>
             {toFavoriteProducts && toFavoriteProducts.map((el) => {
               return el.status ? (
                 <ProductCard el={el} key={el.guid} />

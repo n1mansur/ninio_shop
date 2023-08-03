@@ -46,7 +46,7 @@ useEffect(() => {
         }
           {similar.length > 0 ? <Box mb={'24px'}>
             <Heading fontWeight={'600'} fontSize={'30px'} mb={'24px'}>Похожие товары</Heading>
-            <SimpleGrid columns={[1, 2, 3, 4]} spacing={'20px'}  className={styles.cards} >
+            <SimpleGrid columns={[ 2, 3, 4]} spacing={'20px'}  className={styles.cards} >
               {similar.map(el => <ProductCard el={el} key={el.guid} />)}
             </SimpleGrid>
           </Box> :

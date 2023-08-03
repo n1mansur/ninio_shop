@@ -175,7 +175,9 @@ const Header = ({ data, category }) => {
             <Box className={styles.list}>
               {categoryFilter.map(el => (
                 <Box
-                  onMouseEnter={() => setCategoryValue(el.guid)}
+                  onMouseEnter={() => {setCategoryValue(el.guid)
+                  console.log(el.guid);
+                  }}
                   //onClick={() => setCategoryValue(el.guid)}
                   className={styles.item}
                   key={el.guid}>

@@ -11,7 +11,7 @@ import ProductCard from '@/components/UI/ProductCard'
 import Pagination from '../../components/UI/Pagination'
 
 
-export default function ProductsPage({products:headerProducts, category }) {
+export default function ProductsPage({ products: headerProducts, category }) {
   const [currentPage, setCurrentPage] = useState(1)
   const [load, SetLoad] = useState(true)
   const [count, setCount] = useState(10)
@@ -34,9 +34,9 @@ export default function ProductsPage({products:headerProducts, category }) {
       }
     ).then(res => setProducts(res.data.response))
       .finally(() => SetLoad(false))
-  }, []);
+  }, [router.query.type, router.query.id]);
 
-  const data = products?.filter(el => el.status)?.slice(firstPostIndex, lastPostIndex)
+  const data = products.length > 0 && products?.filter(el => el.status)?.slice(firstPostIndex, lastPostIndex)
 
   return (load
     ? <Box w={'100vw'} h={'100vh'} display={'flex'} alignItems={'center'} justifyContent={'center'}>
@@ -48,7 +48,7 @@ export default function ProductsPage({products:headerProducts, category }) {
         <Container>
           <Box className={styles.productsSection}>
             {data.length > 0
-              ? <SimpleGrid columns={[1, 2, 3, 4]} spacing={'20px'} className={styles.cards} >
+              ? <SimpleGrid columns={[ 2, 3, 4]} spacing={'20px'} className={styles.cards} >
                 {data.map(el => el?.status && <ProductCard el={el} key={el.guid} />)}
               </SimpleGrid>
               : <Heading>Товары закончились</Heading>}

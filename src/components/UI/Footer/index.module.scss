@@ -39,14 +39,21 @@
     display: flex;
     gap: 10px;
     overflow: scroll;
-    &::-webkit-scrollbar{
+
+    &::-webkit-scrollbar {
       display: none;
     }
-    
+
     @include breakpoint('md') {
       max-width: none;
       width: 50vw;
     }
 
+  }
+}
+
+.maps {
+  &>button {
+    display: none !important;
   }
 }

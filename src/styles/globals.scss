@@ -98,3 +98,7 @@ a {
 [class*="copyrights-plane"] {
   display: none !important;
 }
+.map-widget-layout-view__geolocation,
+.map-geolocation-control ._noprint{
+  display: none !important ;
+}

@@ -23,7 +23,7 @@ const Footer = () => {
   return (
     <Box className={styles.footer}>
       <Container className={styles.container}>
-        <Box flex={'1'}>
+        <Box className={styles.mapsBox} flex={'1'}>
           <Maps />
         </Box>
         <Box className={styles.contacts}>

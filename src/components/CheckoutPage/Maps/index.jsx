@@ -6,6 +6,7 @@ import {
   withYMaps,
   FullscreenControl,
   Placemark,
+  GeolocationControl,
 }
   from '@pbe/react-yandex-maps';
 const API_KEY = '1b0887e8-557b-479a-a776-134a8698943c'
@@ -37,7 +38,10 @@ export default function Maps({ setAddressInfo }) {
     }, 300);
   };
 
-
+  const handleLocationChange = (e) => {
+    setAddressInfo({ resultCoordinates: e.originalEvent.position });
+  };
+  
   const defaultState = {
     center: [41.304501, 69.2416],
     zoom: 11,
@@ -61,6 +65,7 @@ export default function Maps({ setAddressInfo }) {
           onResultShow={handleResultShow}
           options={{ float: 'left' }}
         />
+        <GeolocationControl onLocationChange={handleLocationChange} />
       </Map>
     </YMaps>
   )

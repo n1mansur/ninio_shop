@@ -65,7 +65,6 @@ export default function CheckoutPage() {
         duration: 4000,
         isClosable: true,
       })
-
     } else {
       const index = values.telegram_nickname.lastIndexOf('@')
       //console.log(
@@ -79,7 +78,6 @@ export default function CheckoutPage() {
       //    {
       //      total_price: sumWithInitial,
       //      ordered_products: [...productsId],
-      //      address_info: addressInfo.request,
       //      address_latlong: addressInfo.resultCoordinates,
       //    })
       //);
@@ -94,10 +92,8 @@ export default function CheckoutPage() {
           {
             total_price: sumWithInitial,
             ordered_products: [...productsId],
-            address_info: addressInfo.request,
             address_latlong: addressInfo.resultCoordinates,
-          }
-        )
+          })
       )
       toast({
         title: 'Отправляем...',

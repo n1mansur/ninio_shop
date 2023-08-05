@@ -17,16 +17,25 @@
     }
   }
 
-  .cards {
+  //.cards {
+  //display: flex;
+  //gap: 24px;
+  //justify-content: start;
+  //align-items: center;
+  //overflow: scroll;
+  //&::-webkit-scrollbar{
+  //  display: none;
+  //}
+  .swiper {
     width: 100%;
-    display: flex;
-    gap: 24px;
-    justify-content: start;
-    align-items: center;
-    overflow: scroll;
-    &::-webkit-scrollbar{
-      display: none;
+
+    .swiperSlide {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: transparent;
     }
+
     .card {
       min-width: 188px;
       max-width: 188px;
@@ -37,7 +46,7 @@
       justify-content: center;
       align-items: center;
       overflow: hidden;
-      
+
       .cardImg {
         border: none;
         width: 100%;

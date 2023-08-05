@@ -48,8 +48,8 @@ export default function Categories({ data }) {
           className={styles.swiper}
         >
           {category.map((el) => (
-            <SwiperSlide className={styles.swiperSlide}>
-              <Link href={`/products/main_category?id=${el.guid}`} className={styles.card} key={el.guid}>
+            <SwiperSlide className={styles.swiperSlide} key={el.guid}>
+              <Link href={`/products/main_category?id=${el.guid}`} className={styles.card}>
                 <Box className={styles.cardImg}>
                   <img src={el.photo} alt={el?.name} />
                 </Box>

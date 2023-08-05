@@ -56,8 +56,8 @@ export default function Products({ data }) {
       >
         {dis && dis.map((el) => {
           return (
-            <SwiperSlide className={styles.swiperSlide}>
-              <DiscountProductCard el={el.products_id_data} discount={el} key={el.guid} />
+            <SwiperSlide className={styles.swiperSlide} key={el.guid} >
+              <DiscountProductCard el={el.products_id_data} discount={el}/>
             </SwiperSlide>
           )
         })}

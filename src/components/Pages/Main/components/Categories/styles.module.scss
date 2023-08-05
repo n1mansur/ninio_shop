@@ -13,7 +13,8 @@
     font-weight: 600;
     line-height: 40px;
     margin-bottom: 24px;
-    @include breakpoint('md'){
+
+    @include breakpoint('md') {
       text-align: center;
       font-size: 16px;
       font-weight: 500;
@@ -34,8 +35,13 @@
       display: none;
     }
 
+    .swiperSlide {
+      padding: 5px;
+    }
+
     .card {
-      width: 188px;
+      width: 100%;
+      //width: 188px;
       min-width: 150px;
       height: 200px;
       padding: 20px;
@@ -50,10 +56,13 @@
       @include breakpoint('md') {
         height: 150px;
       }
-
-      &:hover {
-        box-shadow: 0 0 5px rgba(128, 128, 128, 0.3);
+      @include md {
+        &:hover {
+          box-shadow: 0 0 5px rgba(128, 128, 128, 0.3);
+          transform: scale(1.04, 1.04);
+        }
       }
+
 
       .cardImg {
         //width: 125px;

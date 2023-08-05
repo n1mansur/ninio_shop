@@ -35,8 +35,11 @@
       display: none;
     }
 
-    .swiperSlide {
-      padding: 5px;
+    .swiper {
+      width: 100%;
+      .swiperSlide {
+        padding: 5px;
+      }
     }
 
     .card {
@@ -56,6 +59,7 @@
       @include breakpoint('md') {
         height: 150px;
       }
+
       @include md {
         &:hover {
           box-shadow: 0 0 5px rgba(128, 128, 128, 0.3);

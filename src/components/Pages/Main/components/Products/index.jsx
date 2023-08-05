@@ -36,7 +36,7 @@ export default function Products({ data }) {
         }}
         breakpoints={{
           '@0.00': {
-            slidesPerView: 2,
+            slidesPerView: 1,
             spaceBetween: 10,
           },
           '@0.75': {

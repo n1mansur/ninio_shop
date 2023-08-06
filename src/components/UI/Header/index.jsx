@@ -187,7 +187,7 @@ const Header = ({ data, category }) => {
             {filteredCategory &&
               <Box className={styles.list}>
                 {filteredCategory?.map(el => (
-                  <Link href={`/products/category_id?id=${el.guid}`} className={styles.item} onClick={() => catalogFn()} key={el.guid}>
+                  <Link href={`/products/categories_id?id=${el.guid}`} className={styles.item} onClick={() => catalogFn()} key={el.guid}>
                     {el.name}
                     <ChevronRightIcon />
                   </Link>

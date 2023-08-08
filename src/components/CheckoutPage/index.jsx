@@ -28,7 +28,7 @@ export default function CheckoutPage() {
     instagram_nickname: '',
     address_info: '',
     total_price: '',
-    payment_type: '',
+    payment_type: 'картой',
     ordered_products: [],
   }
   const validate = (values) => {
@@ -192,7 +192,7 @@ export default function CheckoutPage() {
                       </Text>
                       <Box className={styles.typePaymentSection}>
                         <label className={props.values.payment_type === 'картой' ? styles.active : ''}>
-                          карта
+                          Карта
                           {
                             props.values.payment_type === 'картой'
                             && <Box className={styles.radioIcon}>

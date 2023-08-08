@@ -105,9 +105,11 @@
   width: 100%;
   display: flex;
   gap: 16px;
+  background: #F5F5F5;
+
 
   &>label.active {
-    background: #F5F5F5;
+    background: #d0d0d0;
   }
   &>label {
     border-radius: 8px;

@@ -1,3 +1,4 @@
+'use client'
 import React from 'react'
 import '@/styles/editorStyles.scss'
 import '@/styles/globals.scss'

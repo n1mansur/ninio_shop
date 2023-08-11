@@ -45,7 +45,6 @@ export default function DiscountProductCard({ el, discount }) {
       <Box
         className={styles.product} key={el.guid}
       >
-      <span className={styles.discountStyle}>Акция</span>
         <Box className={styles.heroSection}>
           <Box
             w={'100%'}
@@ -80,12 +79,14 @@ export default function DiscountProductCard({ el, discount }) {
             {el.categories_id_data.name}
           </Text>
           <Text className={styles.productName}>
-            <Tooltip label={el.name}  aria-label='A tooltip'>
+            <Tooltip label={el.name} aria-label='A tooltip'>
               <span>{el.name}</span>
             </Tooltip>
           </Text>
-          <Text className={styles.oldPrice}>не {oldPriceFormatted} Сум</Text>
-          <Text className={styles.newPrice}>{newPriceFormatted} Сум</Text>
+          <div className={styles.prices}>
+            <Text className={styles.oldPrice}>не {oldPriceFormatted} Сум</Text>
+            <Text className={styles.newPrice}>{newPriceFormatted} Сум</Text>
+          </div>
         </Box>
         <Button className={styles.buyBtn}>Добавить</Button>
       </Box>

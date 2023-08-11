@@ -96,17 +96,21 @@
       }
     }
 
-    .oldPrice {
-      font-size: 14px;
-      font-weight: 600;
-      color: rgb(149, 149, 149);
-      text-decoration: line-through;
-    }
+    .prices {
+      border-radius: 12px;
+      background: #ffee0a;
+      .oldPrice {
+        font-size: 14px;
+        font-weight: 600;
+        color: rgb(149, 149, 149);
+        text-decoration: line-through;
+      }
 
-    .newPrice {
-      font-size: 20px;
-      font-weight: 600;
-      color: rgba(13, 13, 13, 1);
+      .newPrice {
+        font-size: 20px;
+        font-weight: 600;
+        color: rgba(13, 13, 13, 1);
+      }
     }
   }
 
@@ -114,16 +118,4 @@
     width: 100%;
     background: rgba(3, 50, 70, 1);
   }
-}
-
-.discountStyle {
-  position: absolute;
-  top: 23px;
-  right: -25px;
-  background: red;
-  color: #fff;
-  width: 140px;
-  text-align: center;
-  transform: rotate(40deg);
-  z-index: 2;
 }

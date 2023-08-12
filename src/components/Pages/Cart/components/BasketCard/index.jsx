@@ -4,7 +4,7 @@ import styles from './styles.module.scss'
 import { HeartIcon, DeleteIcon, PlusIcon, MinusIcon } from '@/components/svg'
 import { useResponsive } from '@/hooks/useResponsive'
 
-export default function BasketCard({ el, toFavorite, setProducts }) {
+export default function BasketCard({ el, setProducts }) {
   const md = useResponsive('md')
   const [quantity, setQuantity] = useState(el.quantity);
   const [tofavorite, setTofavorite] = useState([]);
@@ -24,6 +24,7 @@ export default function BasketCard({ el, toFavorite, setProducts }) {
     find
       ? tofavoriteProducts = tofavoriteProducts.filter(old => old != el.guid)
       : tofavoriteProducts.push(el.guid)
+      console.log(tofavoriteProducts);
     setTofavorite(tofavoriteProducts)
     localStorage.setItem('toFavorites', JSON.stringify(tofavoriteProducts))
   }

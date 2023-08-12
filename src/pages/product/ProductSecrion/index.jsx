@@ -18,6 +18,7 @@ export default function ProductSecrion({ el, discount = false }) {
 
   const formattedNumber = el?.sell_price
   const discountFormatted = discount?.new_price
+
   const price = (!discountFormatted ? formattedNumber : discountFormatted)?.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1 ')
 
   const warningFn = () => {
@@ -47,7 +48,7 @@ export default function ProductSecrion({ el, discount = false }) {
   const toggle = discount && tofavorite?.filter(old => old === el?.guid)
 
   const addedFn = (products) => {
-    products.push({ ...el, quantity, sell_price: !discountFormatted ? formattedNumber : discountFormatted })
+    products.push({ guid: el.guid, quantity: quantity })
     toast({
       title: `Добавлено`,
       status: 'success',

@@ -100,6 +100,10 @@
       }
     }
 
+    .btns {
+      display: flex;
+      justify-content: space-between;
+    }
     .buyBtn {
       width: 100%;
       background: rgba(3, 50, 70, 1);

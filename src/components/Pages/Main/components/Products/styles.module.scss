@@ -1,18 +1,28 @@
 @import '@/styles/breakpoints';
 
-.discountProducts{
+.discountProducts {
   display: flex;
   overflow: scroll;
   gap: 24px;
   //margin-bottom: 24px;
   padding: 20px 10px;
-  @include breakpoint('md'){
+
+  @include breakpoint('md') {
     gap: 14px;
   }
+
   &::-webkit-scrollbar {
     display: none;
   }
 }
-.swiperSlide {
-  border-radius: 12px !important;
+
+.swiper {
+
+  &>div {
+    padding: 10px 0 !important;
+  }
+
+  .swiperSlide {
+    border-radius: 12px !important;
+  }
 }

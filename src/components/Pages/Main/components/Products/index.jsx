@@ -24,6 +24,7 @@ export default function Products({ data }) {
       {/*<Box className={styles.discountProducts} >*/}
       <Swiper
         style={{ marginBottom:'24px'}}
+        className={styles.swiper}
         slidesPerView={1}
         spaceBetween={10}
         cssMode={true}

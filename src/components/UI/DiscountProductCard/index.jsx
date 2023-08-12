@@ -3,8 +3,10 @@ import { Box, Button, Image, Text, Tooltip, useToast } from '@chakra-ui/react'
 import Link from 'next/link'
 import { HeartIcon } from '@/components/svg'
 import styles from './styles.module.scss'
+import {useResponsive}from '@/hooks/useResponsive.js'
 
 export default function DiscountProductCard({ el, discount }) {
+  const def = useResponsive()
   const toast = useToast()
   const [open, setOpen] = useState(false);
   const [product, setProduct] = useState({ guid: el.guid, quantity: 1 });
@@ -109,7 +111,7 @@ export default function DiscountProductCard({ el, discount }) {
           {open ?
             <Box className={styles.btns}>
               <Button bg={'#033246'} onClick={() => minusFn(el)}>-</Button>
-              <Button onClick={() => inCart(product)} bg={'#033246'}>Добавить {product.quantity}</Button>
+              <Button onClick={() => inCart(product)} bg={'#033246'}>{!def&&'Добавить'} {product.quantity}</Button>
               <Button bg={'#033246'} onClick={() => plusFn(el)}>+</Button>
             </Box>
             : <Button className={styles.buyBtn}>Добавить</Button>}

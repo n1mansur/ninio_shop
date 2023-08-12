@@ -71,6 +71,7 @@ export default function ProductCard({ el }) {
     const find = products.some(old => old.guid == product.guid)
     !find ? addedFn(products, product) : warningFn()
     localStorage.setItem('products', JSON.stringify(products))
+    setOpen(false)
   }
 
   return (
@@ -78,8 +79,8 @@ export default function ProductCard({ el }) {
       w={'auto'}
       h={'auto'}
       className={styles.productCard}
-      onMouseEnter={() => setOpen(true)}
-      onMouseLeave={() => setOpen(false)}
+      //onMouseEnter={() => }
+      //onMouseLeave={() => }
     >
       <Box
         className={styles.product} key={el.guid}
@@ -116,7 +117,7 @@ export default function ProductCard({ el }) {
           </Box>
           <Box className={styles.productInfo}>
             <Text className={styles.productCategory}>
-              {el.categories_id_data.name}
+              {el.brands_id_data.name}
             </Text>
             <Text className={styles.productName}>
               <Tooltip label={el.name} aria-label='A tooltip'>
@@ -133,7 +134,7 @@ export default function ProductCard({ el }) {
               <Button onClick={() => inCart(product)} bg={'#033246'}>{!def && 'Добавить'} {product.quantity}</Button>
               <Button bg={'#033246'} onClick={() => plusFn(el)}>+</Button>
             </Box>
-            : <Button className={styles.buyBtn}>Добавить</Button>}
+            : <Button onClick={() => setOpen(true)} bg={'red'} className={styles.buyBtn}>Добавить</Button>}
         </div>
       </Box>
     </Box>

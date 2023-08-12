@@ -17,13 +17,6 @@ export default function Pagination({
 
   return (
     <div className={styles.pagination}>
-      <Box  display={'flex'} justifyContent={'space-between'} gap={'20px'}>
-        {count != 10 && <Button onClick={() => setCount(10)}>10</Button>}
-        {count != 20 && <Button onClick={() => setCount(20)}>20</Button>}
-        {count != 30 && <Button onClick={() => setCount(30)}>30</Button>}
-        {count != 40 && <Button onClick={() => setCount(40)}>40</Button>}
-        {count != 50 && <Button onClick={() => setCount(50)}>50</Button>}
-      </Box>
       <Box display={'flex'} justifyContent={'space-between'} gap={'20px'}>
         <button
           onClick={() => setCurrentPage((old) => (old > 1 ? old - 1 : old))}

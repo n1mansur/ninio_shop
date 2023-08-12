@@ -12,7 +12,7 @@ import Pagination from '../../components/UI/Pagination'
 
 export default function ProductsPage({ products = [], category }) {
   const [currentPage, setCurrentPage] = useState(1)
-  const [count, setCount] = useState(10)
+  const [count, setCount] = useState(12)
   const lastPostIndex = currentPage * count
   const firstPostIndex = lastPostIndex - count
   const data = products?.filter(el => el.status)?.slice(firstPostIndex, lastPostIndex)

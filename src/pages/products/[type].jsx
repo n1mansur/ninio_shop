@@ -14,7 +14,7 @@ import Pagination from '../../components/UI/Pagination'
 export default function ProductsPage({ products: headerProducts, category }) {
   const [currentPage, setCurrentPage] = useState(1)
   const [load, SetLoad] = useState(true)
-  const [count, setCount] = useState(10)
+  const [count, setCount] = useState(12)
   const lastPostIndex = currentPage * count
   const firstPostIndex = lastPostIndex - count
 
@@ -30,7 +30,8 @@ export default function ProductsPage({ products: headerProducts, category }) {
           with_relations: true,
           [router.query.type]: router.query.id
         },
-        offset: 0
+        offset: lastPostIndex,
+        limit: 12
       }
     ).then(res => setProducts(res.data.response))
       .finally(() => SetLoad(false))
@@ -53,7 +54,7 @@ export default function ProductsPage({ products: headerProducts, category }) {
               </SimpleGrid>
               : <Heading>Товары закончились</Heading>}
           </Box>
-          {data.length > 10 && <Box display={'flex'} justifyContent={'center'}>
+          {<Box display={'flex'} justifyContent={'center'}>
             <Pagination
               totalTodos={products?.length}
               count={count}

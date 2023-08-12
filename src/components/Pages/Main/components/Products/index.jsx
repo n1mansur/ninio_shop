@@ -23,7 +23,7 @@ export default function Products({ data }) {
     <Box mb={'24px'}>
       {/*<Box className={styles.discountProducts} >*/}
       <Swiper
-        style={{ marginBottom:'24px'}}
+        style={{ marginBottom: '24px' }}
         className={styles.swiper}
         slidesPerView={1}
         spaceBetween={10}
@@ -58,7 +58,7 @@ export default function Products({ data }) {
         {dis && dis.map((el) => {
           return (
             <SwiperSlide className={styles.swiperSlide} key={el.guid} >
-              <DiscountProductCard el={el.products_id_data} discount={el}/>
+              <DiscountProductCard el={el.products_id_data} discount={el} />
             </SwiperSlide>
           )
         })}
@@ -71,7 +71,7 @@ export default function Products({ data }) {
           )
         })}
       </SimpleGrid>
-      {products.length > 8 && <Box w={'100%'} display={'flex'} justifyContent={'end'}>
+      {data.filter(el => el.status).length > 8 && <Box w={'100%'} display={'flex'} justifyContent={'end'}>
         <Link href={`/products/`}>Смотреть все</Link>
       </Box>}
     </Box>

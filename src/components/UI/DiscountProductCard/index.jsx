@@ -55,19 +55,13 @@ export default function DiscountProductCard({ el, discount }) {
     const find = products.some(old => old.guid == product.guid)
     !find ? addedFn(products, product) : warningFn()
     localStorage.setItem('products', JSON.stringify(products))
+    setOpen(false)
   }
 
 
   return (
-    <Box
-      w={'auto'}
-      h={'auto'}
-      onMouseEnter={() => setOpen(true)}
-      onMouseLeave={() => setOpen(false)}
-    >
-      <Box
-        className={styles.product} key={el.guid}
-      >
+    <Box w={'auto'} h={'auto'}>
+      <Box className={styles.product} key={el.guid}>
         <Box onClick={() => {window.location.href = `/product/${discount.guid}?discount=true`}}>
           <Box className={styles.heroSection}>
             <Box
@@ -114,7 +108,7 @@ export default function DiscountProductCard({ el, discount }) {
               <Button onClick={() => inCart(product)} bg={'#033246'}>{!def&&'Добавить'} {product.quantity}</Button>
               <Button bg={'#033246'} onClick={() => plusFn(el)}>+</Button>
             </Box>
-            : <Button className={styles.buyBtn}>Добавить</Button>}
+            : <Button onClick={() => setOpen(true)} className={styles.buyBtn}>Добавить</Button>}
         </div>
       </Box>
     </Box>

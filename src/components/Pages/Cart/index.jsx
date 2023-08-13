@@ -5,12 +5,10 @@ import styles from './styles.module.scss'
 import { TrashIcon } from '@/components/svg.js'
 import Container from '@/components/UI/Container'
 import BasketCard from './components/BasketCard'
-import { productsService } from '@/services/productsService'
 import Link from 'next/link'
 
 export default function Cart() {
   const [products, setProducts] = useState([]);
-  const [getProducts, setGetProducts] = useState([]);
   const [toFavorite, setЕoFavorite] = useState();
 
 
@@ -18,21 +16,8 @@ export default function Cart() {
     const storedProducts = readLocalStorage('products');
     const storedToFavorite = readLocalStorage('toFavorites');
     setЕoFavorite(storedToFavorite || []);
-    setGetProducts(storedProducts || []);
+    setProducts(storedProducts || []);
   }, []);
-  useEffect(() => {
-      productsService.getList(
-        {
-          data:
-          {
-            with_relations: true,
-          },
-          offset: 0
-        }
-      ).then(res => setProducts(res.data.response))
-  }, []);
-
-  console.log(getProducts);
 
   const sum = products.reduce((accumulator, currentValue) => {
     return accumulator + Number(currentValue.sell_price) * currentValue.quantity;

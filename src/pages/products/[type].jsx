@@ -30,7 +30,7 @@ export default function ProductsPage({ products: headerProducts, category }) {
           with_relations: true,
           [router.query.type]: router.query.id
         },
-        offset: lastPostIndex,
+        offset: 0,
         limit: 12
       }
     ).then(res => setProducts(res.data.response))
@@ -50,7 +50,7 @@ export default function ProductsPage({ products: headerProducts, category }) {
           <Box className={styles.productsSection}>
             {data.length > 0
               ? <SimpleGrid columns={[ 2, 3, 4]} spacing={'20px'} className={styles.cards} >
-                {data.map(el => el?.status && <ProductCard el={el} key={el.guid} />)}
+                {data.map(el => el?.status && <ProductCard el={{ ...el, quantity: 0 }} key={el.guid} />)}
               </SimpleGrid>
               : <Heading>Товары закончились</Heading>}
           </Box>

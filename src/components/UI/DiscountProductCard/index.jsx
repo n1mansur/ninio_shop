@@ -7,9 +7,8 @@ import {useResponsive}from '@/hooks/useResponsive.js'
 
 export default function DiscountProductCard({ el, discount }) {
   const def = useResponsive()
-  const toast = useToast()
   const [open, setOpen] = useState(false);
-  const [product, setProduct] = useState({ guid: el.guid, quantity: 1 });
+  const [product, setProduct] = useState(el);
 
   function checkDate(dateStr) {
     const today = new Date()
@@ -22,40 +21,19 @@ export default function DiscountProductCard({ el, discount }) {
   const oldPriceFormatted = discount?.old_price?.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1 ');
   const newPriceFormatted = discount?.new_price?.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1 ');
 
-
-  const plusFn = () => {
-    setProduct(old => ({ ...old, quantity: old.quantity + 1 }))
-  }
-
-  const minusFn = () => {
-    setProduct(old => ({ ...old, quantity: old.quantity > 1 ? old.quantity - 1 : old.quantity }))
-  }
-
-  const addedFn = (products, product) => {
-    products.push({ guid: product.guid, quantity: product.quantity })
-    toast({
-      title: `Добавлено`,
-      status: 'success',
-      isClosable: true,
-      position: 'top'
-    })
-  }
-
-  const warningFn = () => {
-    toast({
-      title: `Добавлено! можете изменить количество в корзинке`,
-      status: 'warning',
-      isClosable: true,
-      position: 'top'
-    })
-  }
-
-  const inCart = (product) => {
+  const inCart = (el, operator) => {
     let products = JSON.parse(localStorage.getItem('products')) || []
-    const find = products.some(old => old.guid == product.guid)
-    !find ? addedFn(products, product) : warningFn()
+    let find = products.some(old => old.guid == el.guid)
+    find ? products = products.map(p => {
+      if (p.guid == el.guid) {
+        operator == 'plus' ? setProduct({ ...p, quantity: p.quantity + 1 }) : setProduct({ ...p, quantity: p.quantity - 1 })
+        return operator == 'plus' ? { ...p, quantity: p.quantity + 1 } : { ...p, quantity: p.quantity - 1 }
+      } else {
+        return p
+      }
+    })
+      : products.push({ guid: el.guid, photo: el.photo, quantity: el.quantity, name: el.name, sell_price: el.sell_price })
     localStorage.setItem('products', JSON.stringify(products))
-    setOpen(false)
   }
 
 
@@ -102,13 +80,14 @@ export default function DiscountProductCard({ el, discount }) {
           </Box>
         </Box>
         <div>
-          {open ?
+        {open ?
             <Box className={styles.btns}>
-              <Button bg={'#033246'} onClick={() => minusFn(el)}>-</Button>
-              <Button onClick={() => inCart(product)} bg={'#033246'}>{!def&&'Добавить'} {product.quantity}</Button>
-              <Button bg={'#033246'} onClick={() => plusFn(el)}>+</Button>
+              {product.quantity > 1 ? <Button bg={'#033246'} onClick={() => inCart(el, 'minus')}>-</Button> : <Button bg={'#0d3a4d8a'}>-</Button>}
+              <div>{product.quantity}</div>
+              <Button bg={'#033246'} onClick={() => inCart(el, 'plus')}>+</Button>
             </Box>
-            : <Button onClick={() => setOpen(true)} className={styles.buyBtn}>Добавить</Button>}
+            : <Button onClick={() => { setOpen(true), inCart(el, 'plus') }} bg={'red'} className={styles.buyBtn}>Добавить</Button>
+            }
         </div>
       </Box>
     </Box>

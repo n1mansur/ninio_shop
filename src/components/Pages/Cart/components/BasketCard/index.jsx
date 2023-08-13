@@ -1,4 +1,4 @@
-import { Box, Flex, Heading, Text, Button, Card, Img, Grid, GridItem } from '@chakra-ui/react'
+import { Box, Flex, Button } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import styles from './styles.module.scss'
 import { HeartIcon, DeleteIcon, PlusIcon, MinusIcon } from '@/components/svg'

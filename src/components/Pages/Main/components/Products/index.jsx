@@ -58,7 +58,7 @@ export default function Products({ data }) {
         {dis && dis.map((el) => {
           return (
             <SwiperSlide className={styles.swiperSlide} key={el.guid} >
-              <DiscountProductCard el={el.products_id_data} discount={el} />
+              <DiscountProductCard el={{ ...el.products_id_data, quantity: 0 }} discount={el} />
             </SwiperSlide>
           )
         })}
@@ -67,7 +67,7 @@ export default function Products({ data }) {
       <SimpleGrid columns={[2, 3, 4]} spacing={'15px'} >
         {products && products.map((el) => {
           return (
-            <ProductCard el={el} key={el.guid} />
+            <ProductCard el={{ ...el, quantity: 0 }} key={el.guid} />
           )
         })}
       </SimpleGrid>

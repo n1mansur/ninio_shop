@@ -31,7 +31,7 @@ export default function ProductsPage({ products: headerProducts, category }) {
           [router.query.type]: router.query.id
         },
         offset: 0,
-        limit: 12
+        limit: 2
       }
     ).then(res => setProducts(res.data.response))
       .finally(() => SetLoad(false))
@@ -50,7 +50,7 @@ export default function ProductsPage({ products: headerProducts, category }) {
           <Box className={styles.productsSection}>
             {data.length > 0
               ? <SimpleGrid columns={[ 2, 3, 4]} spacing={'20px'} className={styles.cards} >
-                {data.map(el => el?.status && <ProductCard el={{ ...el, quantity: 0 }} key={el.guid} />)}
+                {data.map(el => el?.status && <ProductCard el={{ ...el, quantity: 1 }} key={el.guid} />)}
               </SimpleGrid>
               : <Heading>Товары закончились</Heading>}
           </Box>

@@ -23,6 +23,7 @@ export default function ProductCard({ el }) {
     setTofavorite(tofavoriteProducts)
     products = products.map(p => {
       if (p.guid == el.guid) {
+        setOpen(true)
         setProduct({ ...p, quantity: p.quantity + 1 })
         return { ...p, quantity: p.quantity + 1 }
       } else {
@@ -59,6 +60,8 @@ export default function ProductCard({ el }) {
       : products.push({ guid: el.guid, photo: el.photo, quantity: el.quantity, name: el.name, sell_price: el.sell_price })
     localStorage.setItem('products', JSON.stringify(products))
   }
+
+
 
   return (
     <Box

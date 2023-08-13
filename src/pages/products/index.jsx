@@ -10,33 +10,61 @@ import { useRouter } from 'next/router'
 import ProductCard from '@/components/UI/ProductCard'
 import Pagination from '../../components/UI/Pagination'
 
-export default function ProductsPage({ products = [], category }) {
+export default function ProductsPage({ category }) {
   const [currentPage, setCurrentPage] = useState(1)
-  const [count, setCount] = useState(12)
+  const [count, setCount] = useState(3)
+  const [length, setLength] = useState(0)
+  const [products, setProducts] = useState([]);
+  const [load, SetLoad] = useState(false)
   const lastPostIndex = currentPage * count
   const firstPostIndex = lastPostIndex - count
+  useEffect(() => {
+    SetLoad(true)
+    productsService.getList(
+      {
+        data:
+        {
+          with_relations: true,
+          status: true
+        },
+        offset: firstPostIndex,
+        limit: 3
+      }
+    ).then(res => {
+      setLength(res.data.count);
+      setProducts(res.data.response)
+    })
+      .finally(() => SetLoad(false))
+  }, [firstPostIndex]);
+
+  console.log(products);
+
   const data = products?.filter(el => el.status)?.slice(firstPostIndex, lastPostIndex)
+  //console.log(data);
   return (
     <>
       <SEO />
       <MainLayout products={products} category={category} wrapperSty={styles.bg}>
         <Container position={'relative'}>
           <Box className={styles.productsSection} mb={'24px'}>
-            {data?.length > 0
-              ? <SimpleGrid columns={[ 2, 3, 4]} spacing={'20px'} className={styles.cards} >
-                {data?.map(el => el?.status && <ProductCard el={{ ...el, quantity: 0 }} key={el.guid} />)}
+            {/*{data?.length > 0
+              ? <SimpleGrid columns={[2, 3, 4]} spacing={'20px'} className={styles.cards} >
+                {data?.map(el => el?.status && <ProductCard el={{ ...el, quantity: 1 }} key={el.guid} />)}
               </SimpleGrid>
               : <Heading>Товары закончились</Heading>
-            }
+            }*/}
+            <SimpleGrid columns={[2, 3, 4]} spacing={'20px'} className={styles.cards} >
+                {data?.map(el => el?.status && <ProductCard el={{ ...el, quantity: 1 }} key={el.guid} />)}
+              </SimpleGrid>
           </Box>
           <Box display={'flex'} justifyContent={'center'}>
             <Pagination
-              totalTodos={products?.length}
+              totalTodos={length}
               count={count}
               setCurrentPage={setCurrentPage}
               setCount={setCount}
               currentPage={currentPage}
-              />
+            />
           </Box>
         </Container>
       </MainLayout >

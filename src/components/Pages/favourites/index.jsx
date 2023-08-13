@@ -25,7 +25,7 @@ export default function Favorites({ products: data }) {
           ? <SimpleGrid columns={[ 2, 3, 4]} spacing={'20px'} className={styles.products}>
             {toFavoriteProducts && toFavoriteProducts.map((el) => {
               return el.status ? (
-                <ProductCard el={{ ...el, quantity: 0 }} key={el.guid} />
+                <ProductCard el={{ ...el, quantity: 1 }} key={el.guid} />
               ) : null
             })}
           </SimpleGrid>

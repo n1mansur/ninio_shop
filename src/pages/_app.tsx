@@ -13,6 +13,7 @@ import { QueryParamProvider } from 'use-query-params'
 import '../../node_modules/react-quill/dist/quill.snow.css'
 
 
+
 function MyApp({ Component, pageProps }: AppProps) {
   return (
       <QueryParamProvider adapter={NextAdapterPages}>

@@ -1,17 +1,16 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './styles.module.scss'
 import { Box, Button } from '@chakra-ui/react'
 
 export default function Pagination({
-  totalTodos,
+  totalProducts,
   count,
   setCurrentPage,
-  setCount,
   currentPage,
 }) {
   let arr = []
 
-  for (let i = 1; i <= Math.ceil(totalTodos / count); i++) {
+  for (let i = 1; i <= Math.ceil(totalProducts / count); i++) {
     arr.push(i)
   }
 
@@ -46,7 +45,9 @@ export default function Pagination({
               return (
                 <button
                   key={i}
-                  onClick={() => setCurrentPage(el)}
+                  onClick={() => {
+                    setCurrentPage(el)
+                  }}
                   className={el == currentPage ? 'active' : ''}
                 >
                   {el}

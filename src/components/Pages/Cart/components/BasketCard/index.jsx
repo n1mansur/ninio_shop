@@ -24,7 +24,6 @@ export default function BasketCard({ el, setProducts }) {
     find
       ? tofavoriteProducts = tofavoriteProducts.filter(old => old != el.guid)
       : tofavoriteProducts.push(el.guid)
-      console.log(tofavoriteProducts);
     setTofavorite(tofavoriteProducts)
     localStorage.setItem('toFavorites', JSON.stringify(tofavoriteProducts))
   }

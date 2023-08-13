@@ -25,6 +25,14 @@ a {
   box-sizing: border-box;
 }
 
+.active{
+  background: #033246;
+  color: #fff;
+  box-shadow: 0 0 5px #033246;
+  padding: 0 5px;
+  border-radius: 4px;
+}
+
 .crosshairs {
 
   &::before,

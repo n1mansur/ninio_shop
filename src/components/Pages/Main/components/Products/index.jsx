@@ -21,7 +21,6 @@ export default function Products({ data }) {
 
   return (
     <Box mb={'24px'}>
-      {/*<Box className={styles.discountProducts} >*/}
       <Swiper
         style={{ marginBottom: '24px' }}
         className={styles.swiper}
@@ -63,7 +62,6 @@ export default function Products({ data }) {
           )
         })}
       </Swiper>
-      {/*</Box>*/}
       <SimpleGrid columns={[2, 3, 4]} spacing={'15px'} >
         {products && products.map((el) => {
           return (
@@ -72,7 +70,7 @@ export default function Products({ data }) {
         })}
       </SimpleGrid>
       {data.filter(el => el.status).length > 8 && <Box w={'100%'} display={'flex'} justifyContent={'end'}>
-        <Link href={`/products/`}>Смотреть все</Link>
+        <Link href={`/products?offset=0`}>Смотреть все</Link>
       </Box>}
     </Box>
   )

@@ -38,7 +38,6 @@ const Header = ({ data, category }) => {
         && catalogBtnRef.current && !catalogBtnRef.current.contains(event.target)) {
         document.body.style.overflow = "auto";
         setOpen(false)
-        //console.log('blur');
       }
     }
     document.addEventListener("click", handleClickOutside);

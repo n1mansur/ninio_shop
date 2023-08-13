@@ -11,55 +11,35 @@ import ProductCard from '@/components/UI/ProductCard'
 import Pagination from '../../components/UI/Pagination'
 
 
-export default function ProductsPage({ products: headerProducts, category }) {
-  const [currentPage, setCurrentPage] = useState(1)
-  const [load, SetLoad] = useState(true)
-  const [count, setCount] = useState(12)
-  const lastPostIndex = currentPage * count
-  const firstPostIndex = lastPostIndex - count
-
-  const [products, setProducts] = useState([]);
+export default function ProductsPage({ category, data, products }) {
   const router = useRouter()
+  const [currentPage, setCurrentPage] = useState(1)
+  const lastPostIndex = currentPage * 12
+  const firstPostIndex = lastPostIndex - 12
 
   useEffect(() => {
-    SetLoad(true)
-    productsService.getList(
-      {
-        data:
-        {
-          with_relations: true,
-          [router.query.type]: router.query.id
-        },
-        offset: 0,
-        limit: 2
-      }
-    ).then(res => setProducts(res.data.response))
-      .finally(() => SetLoad(false))
-  }, [router.query.type, router.query.id]);
+    router.replace({
+      query: { ...router.query, offset: firstPostIndex }
+    });
+  }, [currentPage]);
 
-  const data = products.length > 0 && products?.filter(el => el.status)?.slice(firstPostIndex, lastPostIndex)
-
-  return (load
-    ? <Box w={'100vw'} h={'100vh'} display={'flex'} alignItems={'center'} justifyContent={'center'}>
-      <Spinner />
-    </Box>
-    : <>
+  return (
+    <>
       <SEO />
       <MainLayout products={products} category={category} wrapperSty={styles.bg}>
         <Container>
           <Box className={styles.productsSection}>
-            {data.length > 0
-              ? <SimpleGrid columns={[ 2, 3, 4]} spacing={'20px'} className={styles.cards} >
-                {data.map(el => el?.status && <ProductCard el={{ ...el, quantity: 1 }} key={el.guid} />)}
+            {data?.response?.length > 0
+              ? <SimpleGrid columns={[2, 3, 4]} spacing={'20px'} className={styles.cards} >
+                {data?.response?.map(el => el?.status && <ProductCard el={{ ...el, quantity: 1 }} key={el.guid} />)}
               </SimpleGrid>
               : <Heading>Товары закончились</Heading>}
           </Box>
           {<Box display={'flex'} justifyContent={'center'}>
             <Pagination
-              totalTodos={products?.length}
-              count={count}
+              totalProducts={data.count}
+              count={12}
               setCurrentPage={setCurrentPage}
-              setCount={setCount}
               currentPage={currentPage}
             />
           </Box>}
@@ -71,15 +51,17 @@ export default function ProductsPage({ products: headerProducts, category }) {
 
 export async function getServerSideProps(context) {
   try {
-    const [categoryData, productsData] =
+    const [categoryData, productsData, data] =
       await Promise.all([
         categoryService.getList({ data: { with_relations: true } }),
-        productsService.getList({ data: { with_relations: true } }),
+        productsService.getList({ data: { with_relations: true, status: true } }),
+        productsService.getList({ data: { with_relations: true, status: true }, offset: context.query.offset, limit: 12 }),
       ])
     return {
       props: {
         products: productsData.data.response ?? [],
         category: categoryData.data.response ?? [],
+        data: data.data ?? [],
       },
     }
   } catch (err) {
@@ -87,6 +69,7 @@ export async function getServerSideProps(context) {
       props: {
         products: [],
         category: [],
+        data: [],
       },
     }
   }

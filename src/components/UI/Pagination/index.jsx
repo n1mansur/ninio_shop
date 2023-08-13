@@ -21,7 +21,7 @@ export default function Pagination({
         <button
           onClick={() => setCurrentPage((old) => (old > 1 ? old - 1 : old))}
         >
-          prev
+          пред
         </button>
         <div
           style={{
@@ -59,7 +59,7 @@ export default function Pagination({
             setCurrentPage((old) => (currentPage < arr.length ? old + 1 : old))
           }
         >
-          next
+          след
         </button>
       </Box>
     </div>

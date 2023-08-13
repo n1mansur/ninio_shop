@@ -24,10 +24,7 @@ export default function ProductCard({ el }) {
     products = products.map(p => {
       if (p.guid == el.guid) {
         setOpen(true)
-        setProduct({ ...p, quantity: p.quantity + 1 })
-        return { ...p, quantity: p.quantity + 1 }
-      } else {
-        return p
+        setProduct(p)
       }
     })
   }, []);
@@ -120,7 +117,7 @@ export default function ProductCard({ el }) {
               <Button bg={'#033246'} onClick={() => inCart(el, 'plus')}>+</Button>
             </Box>
             : <Button onClick={() => { setOpen(true), inCart(el, 'plus') }} bg={'red'} className={styles.buyBtn}>Добавить</Button>
-            }
+          }
         </div>
       </Box>
     </Box>

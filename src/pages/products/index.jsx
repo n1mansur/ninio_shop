@@ -3,7 +3,7 @@ import SEO from '@/components/SEO'
 import MainLayout from '@/components/Layouts/MainLayout'
 import styles from './index.module.scss'
 import Container from '@/components/UI/Container'
-import { Box, Heading, SimpleGrid } from '@chakra-ui/react'
+import { Box, Heading, SimpleGrid, Spinner } from '@chakra-ui/react'
 import { productsService } from '@/services/productsService.js'
 import { categoryService } from '@/services/categoryService'
 import { useRouter } from 'next/router'
@@ -21,15 +21,7 @@ export default function ProductsPage({ category }) {
   useEffect(() => {
     SetLoad(true)
     productsService.getList(
-      {
-        data:
-        {
-          with_relations: true,
-          status: true
-        },
-        offset: firstPostIndex,
-        limit: 3
-      }
+      { data: { with_relations: true, status: true }, offset: firstPostIndex, limit: 3 }
     ).then(res => {
       setLength(res.data.count);
       setProducts(res.data.response)
@@ -41,8 +33,11 @@ export default function ProductsPage({ category }) {
 
   const data = products?.filter(el => el.status)?.slice(firstPostIndex, lastPostIndex)
   //console.log(data);
-  return (
-    <>
+  return (load
+    ? <Box w={'100vw'} h={'100vh'} display={'flex'} alignItems={'center'} justifyContent={'center'}>
+      <Spinner />
+    </Box>
+    : <>
       <SEO />
       <MainLayout products={products} category={category} wrapperSty={styles.bg}>
         <Container position={'relative'}>
@@ -53,9 +48,9 @@ export default function ProductsPage({ category }) {
               </SimpleGrid>
               : <Heading>Товары закончились</Heading>
             }*/}
-            <SimpleGrid columns={[2, 3, 4]} spacing={'20px'} className={styles.cards} >
-                {data?.map(el => el?.status && <ProductCard el={{ ...el, quantity: 1 }} key={el.guid} />)}
-              </SimpleGrid>
+            {!load && <SimpleGrid columns={[2, 3, 4]} spacing={'20px'} className={styles.cards} >
+              {data?.map(el => el?.status && <ProductCard el={{ ...el, quantity: 1 }} key={el.guid} />)}
+            </SimpleGrid>}
           </Box>
           <Box display={'flex'} justifyContent={'center'}>
             <Pagination

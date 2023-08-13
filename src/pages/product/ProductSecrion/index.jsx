@@ -32,6 +32,12 @@ export default function ProductSecrion({ el, discount = false }) {
 
   useEffect(() => {
     let tofavoriteProducts = JSON.parse(localStorage.getItem('toFavorites')) || []
+    let products = JSON.parse(localStorage.getItem('products')) || []
+    products = products.map(p => {
+      if (p.guid == el.guid) {
+        setQuantity(p.quantity)
+      }
+    })
     setTofavorite(tofavoriteProducts)
   }, []);
 
@@ -133,7 +139,7 @@ export default function ProductSecrion({ el, discount = false }) {
             <Text>{el?.product_country_id_data.name_of_country}</Text>
           </div>
           <div className={styles.bySection}>
-            <Box className={styles.countSection}>
+            <Box mb={'10px'} className={styles.countSection}>
               <Button className={styles.countBtn} onClick={() => setQuantity(old => old > 1 ? old - 1 : old)}>
                 <MinusIcon />
               </Button>

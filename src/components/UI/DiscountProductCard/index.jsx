@@ -46,8 +46,6 @@ export default function DiscountProductCard({ el, discount }) {
     localStorage.setItem('products', JSON.stringify(products))
   }
 
-  console.log(discount)
-
 
   return (
     <Box w={'auto'} h={'auto'}>

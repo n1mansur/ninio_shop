@@ -17,7 +17,7 @@ export default function Products({ data }) {
   const products = data.filter(el => el.status).slice(0, 8)
   const [dis, setDis] = useState([]);
   useEffect(() => {
-    discountsService?.getList({ data: { with_relations: true } }).then(res => setDis(res.data.response))
+    discountsService?.getList({ data: { with_relations: true, status: true } }).then(res => setDis(res.data.response))
   }, []);
 
   return (

@@ -35,14 +35,16 @@ export default function ProductsPage({ category, data, products }) {
               </SimpleGrid>
               : <Heading>Товары закончились</Heading>}
           </Box>
-          {<Box display={'flex'} justifyContent={'center'}>
-            <Pagination
-              totalProducts={data.count}
-              count={12}
-              setCurrentPage={setCurrentPage}
-              currentPage={currentPage}
-            />
-          </Box>}
+          {
+            data.count > 12 && <Box display={'flex'} justifyContent={'center'}>
+              <Pagination
+                totalProducts={data.count}
+                count={12}
+                setCurrentPage={setCurrentPage}
+                currentPage={currentPage}
+              />
+            </Box>
+          }
         </Container>
       </MainLayout >
     </>
@@ -55,7 +57,7 @@ export async function getServerSideProps(context) {
       await Promise.all([
         categoryService.getList({ data: { with_relations: true } }),
         productsService.getList({ data: { with_relations: true, status: true } }),
-        productsService.getList({ data: { with_relations: true, status: true }, offset: context.query.offset, limit: 12 }),
+        productsService.getList({ data: { with_relations: true, status: true, [context.query.type]: [context.query.id] }, offset: context.query.offset, limit: 12 }),
       ])
     return {
       props: {

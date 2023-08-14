@@ -182,9 +182,7 @@
 
 .cards {
   display: flex;
-  overflow: scroll;
   width: 100%;
-  gap: 24px;
 
   &::-webkit-scrollbar {
     display: none;

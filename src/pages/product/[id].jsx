@@ -5,32 +5,34 @@ import { categoryService } from '@/services/categoryService.js'
 import SEO from '@/components/SEO'
 import MainLayout from '@/components/Layouts/MainLayout'
 import Container from '@/components/UI/Container'
-import { Box, Heading, SimpleGrid, Spinner} from '@chakra-ui/react'
+import { Box, Heading, SimpleGrid, Spinner } from '@chakra-ui/react'
 import styles from './styles.module.scss'
 import Product from './ProductSecrion'
 import ProductCard from '@/components/UI/ProductCard'
 import { discountsService } from '../../services/discountsService'
+import Link from 'next/link'
 
-export default function ProductPage({products, category}) {
+export default function ProductPage({ products, category }) {
   const router = useRouter()
   const [discountProduct, setDiscountProduct] = useState();
   const [load, SetLoad] = useState(true);
   const discount = router.query?.discount || false
 
-useEffect(() => {
-  SetLoad(true)
-  discountsService.getList(
-    {
-      data:
+  useEffect(() => {
+    SetLoad(true)
+    discountsService.getList(
       {
-        with_relations: true,
-        guid: router.query.id
-      },
-      offset: 0
-    }
-  ).then(res => setDiscountProduct(res.data.response))
-    .finally(() => SetLoad(false))
-}, []);
+        data:
+        {
+          with_relations: true,
+          status: true,
+          guid: router.query.id
+        },
+        offset: 0
+      }
+    ).then(res => setDiscountProduct(res.data.response))
+      .finally(() => SetLoad(false))
+  }, []);
 
   const productData = products?.filter(el => el.guid == router.query.id)?.[0]
   const similar = products?.filter(el => el.categories_id == productData?.categories_id && el.guid != router.query.id && el.status)
@@ -40,20 +42,23 @@ useEffect(() => {
       <MainLayout products={products} category={category} wrapperSty={styles.bg}>
         <Container>
           {!discount
-          ? productData && <Product el={productData} discount={false} />
-          : discountProduct[0].products_id_data && <Product el={discountProduct[0].products_id_data} discount={discountProduct?.[0]} />
-        }
+            ? productData && <Product el={productData} discount={false} />
+            : discountProduct[0].products_id_data && <Product el={discountProduct[0].products_id_data} discount={discountProduct?.[0]} />
+          }
           {similar.length > 0 ? <Box mb={'24px'}>
             <Heading fontWeight={'600'} fontSize={'30px'} mb={'24px'}>Похожие товары</Heading>
-            <SimpleGrid columns={[ 2, 3, 4]} spacing={'20px'}  className={styles.cards} >
+            <SimpleGrid columns={[2, 3, 4]} spacing={'20px'} className={styles.cards} >
               {similar.map(el => <ProductCard el={{ ...el, quantity: 1 }} key={el.guid} />)}
             </SimpleGrid>
           </Box> :
             <Heading fontWeight={'600'} textAlign={'center'} fontSize={'30px'} mb={'24px'}>Похожих товаров нет</Heading>
           }
+          {similar.filter(el => el.status).length > 2 && <Box w={'100%'} display={'flex'} justifyContent={'end'}>
+            <Link href={`/products/categories_id?id=${productData.categories_id}`}>Смотреть все</Link>
+          </Box>}
         </Container>
       </MainLayout>
-    </>:<Box w={'100vw'} h={'100vh'} display={'flex'} alignItems={'center'} justifyContent={'center'}>
+    </> : <Box w={'100vw'} h={'100vh'} display={'flex'} alignItems={'center'} justifyContent={'center'}>
       <Spinner />
     </Box>
   )
@@ -61,10 +66,10 @@ useEffect(() => {
 
 export async function getServerSideProps() {
   try {
-    const [ categoryData, productsData] =
+    const [categoryData, productsData] =
       await Promise.all([
         categoryService.getList({ data: { with_relations: true } }),
-        productsService.getList({ data: { with_relations: true }, offset: 0 }),
+        productsService.getList({ data: { with_relations: true, status: true, }, offset: 0 }),
       ])
     return {
       props: {

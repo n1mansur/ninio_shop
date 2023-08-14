@@ -42,9 +42,11 @@ export default function DiscountProductCard({ el, discount }) {
         return p
       }
     })
-      : products.push({ guid: el.guid, photo: el.photo, quantity: el.quantity, name: el.name, sell_price: el.sell_price })
+      : products.push({ guid: el.guid, photo: el.photo, quantity: el.quantity, name: el.name, sell_price: discount.new_price })
     localStorage.setItem('products', JSON.stringify(products))
   }
+
+  console.log(discount)
 
 
   return (

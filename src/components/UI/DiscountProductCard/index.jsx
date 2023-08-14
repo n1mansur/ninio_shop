@@ -66,7 +66,7 @@ export default function DiscountProductCard({ el, discount }) {
           </Box>
           <Box className={styles.productInfo}>
             <Text className={styles.productCategory}>
-              {el.categories_id_data.name}
+              {el.brands_id_data.name}
             </Text>
             <Text className={styles.productName}>
               <Tooltip label={el.name} aria-label='A tooltip'>

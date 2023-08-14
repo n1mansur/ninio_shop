@@ -28,7 +28,7 @@ export async function getServerSideProps() {
       await Promise.all([
         bannerService.getList({ data: { with_relations: true }, offset: 0 }),
         categoryService.getList({ data: { with_relations: true } }),
-        productsService.getList({ data: { with_relations: true }, offset: 0 }),
+        productsService.getList({ data: { with_relations: true, status: true }, offset: 0 }),
         brandsService.getList({ data: { with_relations: true }, offset: 0 }),
       ])
     return {

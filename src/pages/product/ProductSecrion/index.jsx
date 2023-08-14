@@ -54,7 +54,9 @@ export default function ProductSecrion({ el, discount = false }) {
   const toggle = discount && tofavorite?.filter(old => old === el?.guid)
 
   const addedFn = (products) => {
-    products.push({ guid: el.guid, quantity: quantity })
+    !discount
+      ? products.push({ guid: el.guid, quantity: quantity, photo: el.photo, name: el.name, sell_price: el.sell_price })
+      : products.push({ guid: el.guid, quantity: quantity, photo: el.photo, name: el.name, sell_price: discount.new_price })
     toast({
       title: `Добавлено`,
       status: 'success',

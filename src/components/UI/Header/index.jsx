@@ -65,6 +65,7 @@ const Header = ({ data, category }) => {
         data:
         {
           with_relations: true,
+          status: true,
           name: value
         },
         offset: 0

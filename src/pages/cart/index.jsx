@@ -23,7 +23,7 @@ export async function getServerSideProps() {
     const [categoryData, productsData] =
       await Promise.all([
         categoryService.getList({ data: { with_relations: true } }),
-        productsService.getList({ data: { with_relations: true }, offset: 0 }),
+        productsService.getList({ data: { with_relations: true, status: true }, offset: 0 }),
       ])
     return {
       props: {

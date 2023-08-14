@@ -25,7 +25,7 @@ export default function Slider({ data }) {
         keyboard={true}
         rewind={true}
         autoplay={{
-          delay: 2500,
+          delay: 3000,
           disableOnInteraction: false,
         }}
         modules={[Autoplay, Navigation, Pagination, Mousewheel, Keyboard]}

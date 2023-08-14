@@ -1,10 +1,8 @@
 import Container from '../Container'
 import Logo from '../Logo'
 import styles from './index.module.scss'
-import { FacebookIcon, InstagramIcon, TelegramIcon } from '@/components/svg'
 import { footerService } from '@/services/footerService'
 import Maps from './Maps'
-import Script from 'next/script'
 
 import { Box, Heading, Link, Text } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'

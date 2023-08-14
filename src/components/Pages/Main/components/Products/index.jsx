@@ -8,7 +8,8 @@ import DiscountProductCard from '../../../../UI/DiscountProductCard'
 
 
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, Pagination } from 'swiper';
+import { Navigation, Pagination, Mousewheel, Keyboard, Autoplay } from 'swiper'
+
 import 'swiper/css';
 import 'swiper/css/pagination';
 
@@ -22,16 +23,18 @@ export default function Products({ data }) {
   return (
     <Box mb={'24px'}>
       <Swiper
+        className={'mySwiper'}
         style={{ marginBottom: '24px' }}
-        className={styles.swiper}
-        slidesPerView={1}
-        spaceBetween={10}
         cssMode={true}
+        navigation={true}
         mousewheel={true}
         keyboard={true}
         rewind={true}
+
+        slidesPerView={1}
+        spaceBetween={10}
         autoplay={{
-          delay: 2500,
+          delay: 5000,
           disableOnInteraction: false,
         }}
         breakpoints={{
@@ -52,7 +55,7 @@ export default function Products({ data }) {
             spaceBetween: 50,
           },
         }}
-        modules={[Autoplay, Pagination]}
+        modules={[Autoplay, Navigation, Pagination, Mousewheel, Keyboard]}
       >
         {dis && dis.map((el) => {
           return (

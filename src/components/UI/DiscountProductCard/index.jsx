@@ -10,6 +10,16 @@ export default function DiscountProductCard({ el, discount }) {
   const [open, setOpen] = useState(false);
   const [product, setProduct] = useState(el);
 
+  useEffect(() => {
+    let products = JSON.parse(localStorage.getItem('products')) || []
+    products = products.map(p => {
+      if (p.guid == el.guid) {
+        setOpen(true)
+        setProduct(p)
+      }
+    })
+  }, []);
+
   function checkDate(dateStr) {
     const today = new Date()
     const [year, month, day] = dateStr.split('-')

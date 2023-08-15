@@ -150,16 +150,10 @@ export default function ProductSecrion({ el, discount = false }) {
                 <PlusIcon />
               </Button>
             </Box>
-            {
-              el?.status ?
-                <Button className={styles.inCartBtn}
-                  onClick={() => addInBasket()}>
-                  Добавить в корзину
-                </Button> :
-                <Button className={`${styles.inCartBtn} ${styles.disabled}`}>
-                  Добавить в корзину
-                </Button>
-            }
+            <Button className={styles.inCartBtn}
+              onClick={() => addInBasket()}>
+              Добавить в корзину
+            </Button>
           </div>
         </Card>
       </Card>

@@ -6,7 +6,7 @@ import Link from 'next/link'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
-import { Autoplay, Pagination } from 'swiper';
+import { Autoplay, Keyboard, Mousewheel, Navigation, Pagination } from 'swiper';
 
 export default function Categories({ data }) {
   const category = data.filter((el) => !el.categories_id)
@@ -22,6 +22,7 @@ export default function Categories({ data }) {
           mousewheel={true}
           keyboard={true}
           rewind={true}
+          navigation={true}
           autoplay={{
             delay: 2500,
             disableOnInteraction: false,
@@ -44,8 +45,8 @@ export default function Categories({ data }) {
               spaceBetween: 50,
             },
           }}
-          modules={[Autoplay, Pagination]}
-          className={styles.swiper}
+          modules={[Autoplay, Navigation, Mousewheel, Keyboard]}
+          className='mySwiper'
         >
           {category.map((el) => (
             <SwiperSlide className={styles.swiperSlide} key={el.guid}>

@@ -16,7 +16,7 @@ export default function ProductsPage({ category, data, products }) {
   const [currentPage, setCurrentPage] = useState(1)
   const lastPostIndex = currentPage * 12
   const firstPostIndex = lastPostIndex - 12
-
+  console.log('ProductsPage ==>', data)
   useEffect(() => {
     router.replace({
       query: { ...router.query, offset: firstPostIndex }
@@ -29,9 +29,9 @@ export default function ProductsPage({ category, data, products }) {
       <MainLayout products={products} category={category} wrapperSty={styles.bg}>
         <Container>
           <Box className={styles.productsSection}>
-            {data?.response?.length > 0
+            {products?.length > 0
               ? <SimpleGrid columns={[2, 3, 4]} spacing={'20px'} className={styles.cards} >
-                {data?.response?.map(el => el?.status && <ProductCard el={{ ...el, quantity: 1 }} key={el.guid} />)}
+                {products?.map(el => el?.status && <ProductCard el={{ ...el, quantity: 1 }} key={el.guid} />)}
               </SimpleGrid>
               : <Heading>Товары закончились</Heading>}
           </Box>

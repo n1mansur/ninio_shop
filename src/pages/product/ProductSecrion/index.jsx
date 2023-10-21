@@ -138,7 +138,7 @@ export default function ProductSecrion({ el, discount = false }) {
           <div className={styles.cardInfo}>
             <Text>Страна производства</Text>
             <div className={styles.borderBottom}></div>
-            <Text>{el?.product_country_id_data.name_of_country}</Text>
+            <Text>{el?.product_country_id_data?.name_of_country}</Text>
           </div>
           <div className={styles.bySection}>
             <Box mb={'10px'} className={styles.countSection}>

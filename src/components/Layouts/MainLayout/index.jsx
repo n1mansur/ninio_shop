@@ -4,7 +4,7 @@ import Header from '@/components/UI/Header'
 import styles from './styles.module.scss'
 
 const Layout = ({ children, products, wrapperSty, category }) => {
-  console.log('Layout ==>', products)
+  //console.log('Layout ==>', products)
   return (
     <div className={`${styles.wrapper} ${wrapperSty}`}>
       <Header data={products} category={category} />

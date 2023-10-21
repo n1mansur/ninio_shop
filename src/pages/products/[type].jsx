@@ -16,7 +16,7 @@ export default function ProductsPage({ category, data, products }) {
   const [currentPage, setCurrentPage] = useState(1)
   const lastPostIndex = currentPage * 12
   const firstPostIndex = lastPostIndex - 12
-  console.log('ProductsPage ==>', data)
+  //console.log('ProductsPage ==>', data)
   useEffect(() => {
     router.replace({
       query: { ...router.query, offset: firstPostIndex }

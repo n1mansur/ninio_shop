@@ -3,9 +3,10 @@ import { Box, Button, Image, Text, Tooltip, useToast } from '@chakra-ui/react'
 import Link from 'next/link'
 import { HeartIcon } from '@/components/svg'
 import styles from './styles.module.scss'
-import {useResponsive}from '@/hooks/useResponsive.js'
+import { useResponsive } from '@/hooks/useResponsive.js'
 
 export default function DiscountProductCard({ el, discount }) {
+  console.log(el.create_date)
   const def = useResponsive()
   const [open, setOpen] = useState(false);
   const [product, setProduct] = useState(el);
@@ -50,9 +51,9 @@ export default function DiscountProductCard({ el, discount }) {
   return (
     <Box w={'auto'} h={'auto'}>
       <Box className={styles.product} key={el.guid}>
-        <Box onClick={() => {window.location.href = `/product/${discount.guid}?discount=true`}}>
+        <Box onClick={() => { window.location.href = `/product/${discount.guid}?discount=true` }}>
           <Box className={styles.heroSection}>
-            <Box
+            {el.create_date && <Box
               w={'100%'}
               display={'flex'}
               justifyContent={'space-between'}
@@ -65,7 +66,7 @@ export default function DiscountProductCard({ el, discount }) {
                 checkDate(el.create_date.slice(0, 10)) ?
                   <Text className={styles.status}>Новинка</Text> : null
               }
-            </Box>
+            </Box>}
             <Box
               position={'relative'}
               zIndex={'1'}
@@ -75,9 +76,9 @@ export default function DiscountProductCard({ el, discount }) {
             </Box>
           </Box>
           <Box className={styles.productInfo}>
-            <Text className={styles.productCategory}>
+            {el.create_date && <Text className={styles.productCategory}>
               {el.brands_id_data.name}
-            </Text>
+            </Text>}
             <Text className={styles.productName}>
               <Tooltip label={el.name} aria-label='A tooltip'>
                 <span>{el.name}</span>
@@ -90,14 +91,14 @@ export default function DiscountProductCard({ el, discount }) {
           </Box>
         </Box>
         <div>
-        {open ?
+          {open ?
             <Box className={styles.btns}>
               {product.quantity > 1 ? <Button bg={'#033246'} onClick={() => inCart(el, 'minus')}>-</Button> : <Button bg={'#0d3a4d8a'}>-</Button>}
               <div>{product.quantity}</div>
               <Button bg={'#033246'} onClick={() => inCart(el, 'plus')}>+</Button>
             </Box>
             : <Button onClick={() => { setOpen(true), inCart(el, 'plus') }} bg={'red'} className={styles.buyBtn}>Добавить</Button>
-            }
+          }
         </div>
       </Box>
     </Box>

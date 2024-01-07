@@ -75,6 +75,7 @@ const Header = ({ data, category }) => {
     setSearchValue(value)
   }
 
+
   const onSubmit = (e) => {
     e.preventDefault()
     window.location.href = `/products/name?id=${searchValue}`

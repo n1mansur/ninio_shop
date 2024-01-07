@@ -20,7 +20,10 @@ export default function CheckoutPage() {
   const { products: queryData = [] } = router.query;
   const products = queryData.length > 0 ? JSON.parse(decodeURIComponent(queryData)) : []
   const initVal = 0
-  const sumWithInitial = products.length > 0 ? products?.reduce((acc, value) => acc + value.sell_price, initVal) : ''
+  //const sumWithInitial = products.length > 0 ? products?.reduce((acc, value) => acc + value.sell_price, initVal) : ''
+  const sumWithInitial = products.length > 0 && products?.reduce((accumulator, currentValue) => {
+    return accumulator + Number(currentValue.sell_price) * currentValue.quantity;
+  }, 0);
   const initialValues = {
     full_name: '',
     phone_number: '',
@@ -53,9 +56,9 @@ export default function CheckoutPage() {
   const goBack = () => {
     history.go(-1)
   }
-  
+
   const formattedNumber = sumWithInitial?.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1 ');
-  
+
   const onSubmit = (values) => {
     if (!addressInfo) {
       toast({
@@ -85,9 +88,9 @@ export default function CheckoutPage() {
         Object.assign({},
           {
             ...values,
-            telegram_nickname: index >= 0 
-            ? values.telegram_nickname.slice(index) 
-            : `@${values.telegram_nickname}`
+            telegram_nickname: index >= 0
+              ? values.telegram_nickname.slice(index)
+              : `@${values.telegram_nickname}`
           },
           {
             total_price: sumWithInitial,

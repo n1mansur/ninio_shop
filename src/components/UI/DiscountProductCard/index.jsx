@@ -6,7 +6,7 @@ import styles from './styles.module.scss'
 import { useResponsive } from '@/hooks/useResponsive.js'
 
 export default function DiscountProductCard({ el, discount }) {
-  console.log(el.create_date)
+  //console.log("DiscountProductCard ==>", el.create_date)
   const def = useResponsive()
   const [open, setOpen] = useState(false);
   const [product, setProduct] = useState(el);

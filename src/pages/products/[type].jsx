@@ -3,20 +3,19 @@ import SEO from '@/components/SEO'
 import MainLayout from '@/components/Layouts/MainLayout'
 import styles from './index.module.scss'
 import Container from '@/components/UI/Container'
-import { Box, Heading, SimpleGrid, Spinner } from '@chakra-ui/react'
+import { Box, Heading, SimpleGrid } from '@chakra-ui/react'
 import { productsService } from '@/services/productsService.js'
-import { categoryService } from '@/services/categoryService'
 import { useRouter } from 'next/router'
 import ProductCard from '@/components/UI/ProductCard'
 import Pagination from '../../components/UI/Pagination'
 
 
-export default function ProductsPage({ category, data, products }) {
+export default function ProductsPage({ category, products }) {
   const router = useRouter()
   const [currentPage, setCurrentPage] = useState(1)
   const lastPostIndex = currentPage * 12
   const firstPostIndex = lastPostIndex - 12
-  //console.log('ProductsPage ==>', data)
+
   useEffect(() => {
     router.replace({
       query: { ...router.query, offset: firstPostIndex }
@@ -26,19 +25,19 @@ export default function ProductsPage({ category, data, products }) {
   return (
     <>
       <SEO />
-      <MainLayout products={products} category={category} wrapperSty={styles.bg}>
+      <MainLayout products={products.response} category={category} wrapperSty={styles.bg}>
         <Container>
           <Box className={styles.productsSection}>
-            {products?.length > 0
+            {products.response?.length > 0
               ? <SimpleGrid columns={[2, 3, 4]} spacing={'20px'} className={styles.cards} >
-                {products?.map(el => el?.status && <ProductCard el={{ ...el, quantity: 1 }} key={el.guid} />)}
+                {products.response?.map(el => el?.status && <ProductCard el={{ ...el, quantity: 1 }} key={el.guid} />)}
               </SimpleGrid>
               : <Heading>Товары закончились</Heading>}
           </Box>
           {
-            data.count > 12 && <Box display={'flex'} justifyContent={'center'}>
+            products.count > 12 && <Box display={'flex'} justifyContent={'center'}>
               <Pagination
-                totalProducts={data.count}
+                totalProducts={products.count}
                 count={12}
                 setCurrentPage={setCurrentPage}
                 currentPage={currentPage}
@@ -53,25 +52,22 @@ export default function ProductsPage({ category, data, products }) {
 
 export async function getServerSideProps(context) {
   try {
-    const [categoryData, productsData, data] =
+    const [categoryData, products] =
       await Promise.all([
-        categoryService.getList({ data: { with_relations: true } }),
         productsService.getList({ data: { with_relations: true, status: true } }),
-        productsService.getList({ data: { with_relations: true, status: true, [context.query.type]: [context.query.id] }, offset: context.query.offset, limit: 12 }),
+        productsService.getList({ data: { with_relations: true, status: true, [context.query.type]: context.query.id }, offset: context.query.offset, limit: 12 }),
       ])
     return {
       props: {
-        products: productsData.data.response ?? [],
         category: categoryData.data.response ?? [],
-        data: data.data ?? [],
+        products: products.data ?? [],
       },
     }
   } catch (err) {
     return {
       props: {
-        products: [],
         category: [],
-        data: [],
+        products: [],
       },
     }
   }

@@ -23,6 +23,10 @@ export default function Cart() {
     return accumulator + Number(currentValue.sell_price) * currentValue.quantity;
   }, 0);
 
+  const total = products.reduce((accumulator, currentValue) => {
+    return accumulator + currentValue.quantity;
+  }, 0);
+
   const clearAll = () => {
     localStorage.setItem('products', JSON.stringify([]))
     setProducts([])
@@ -36,10 +40,10 @@ export default function Cart() {
         </Heading>
         <Flex className={styles.cartSection}>
           <Box className={styles.cards}>
-            {products.length ? <>
+            {total ? <>
               <Flex className={styles.cardsHeader}>
                 <Box>
-                  <Text>Всего: {products.length} товара</Text>
+                  <Text>Всего: {total} товара</Text>
                 </Box>
                 <Button onClick={() => clearAll()} className={styles.clearAllBtn} >
                   <TrashIcon />
@@ -58,14 +62,14 @@ export default function Cart() {
               </Text>
             }
           </Box>
-          {Boolean(products.length) && <Box className={styles.totalSection}>
+          {Boolean(total) && <Box className={styles.totalSection}>
             <Flex className={styles.flex}>
               <Heading className={styles.heading}>
                 Итого
               </Heading>
             </Flex>
             <Flex className={styles.flex}>
-              <Text>Всего: {products.length} товара</Text>
+              <Text>Всего: {total} товара</Text>
               <Text className={styles.sum}>
                 {sum.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1 ')} сум
               </Text>

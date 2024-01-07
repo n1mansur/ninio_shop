@@ -4,6 +4,7 @@ import MainLayout from '@/components/Layouts/MainLayout'
 import styles from './index.module.scss'
 import Container from '@/components/UI/Container'
 import { Box, Heading, SimpleGrid } from '@chakra-ui/react'
+import { categoryService } from '@/services/categoryService'
 import { productsService } from '@/services/productsService.js'
 import { useRouter } from 'next/router'
 import ProductCard from '@/components/UI/ProductCard'
@@ -25,7 +26,7 @@ export default function ProductsPage({ category, products }) {
   return (
     <>
       <SEO />
-      <MainLayout products={products.response} category={category} wrapperSty={styles.bg}>
+      <MainLayout products={products} category={category} wrapperSty={styles.bg}>
         <Container>
           <Box className={styles.productsSection}>
             {products.response?.length > 0
@@ -54,7 +55,7 @@ export async function getServerSideProps(context) {
   try {
     const [categoryData, products] =
       await Promise.all([
-        productsService.getList({ data: { with_relations: true, status: true } }),
+        categoryService.getList({ data: { with_relations: true } }),
         productsService.getList({ data: { with_relations: true, status: true, [context.query.type]: context.query.id }, offset: context.query.offset, limit: 12 }),
       ])
     return {
